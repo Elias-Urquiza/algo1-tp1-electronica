@@ -71,7 +71,7 @@ int main(void)
 						estado = MAIN_MENU;
 					else
 					{
-						puts("AAAAAAAAHHH!!!");
+						puts(ERR_PREFIJO);
 						return EXIT_FAILURE;
 					}
 
@@ -89,7 +89,7 @@ int main(void)
 						estado = MAIN_MENU;
 					else
 					{
-						puts("AAAAAAAAHHH!!!");
+						puts(ERR_PREFIJO);
 						return EXIT_FAILURE;
 					}
 
@@ -107,7 +107,7 @@ int main(void)
 						estado = MAIN_MENU;
 					else
 					{
-						puts("AAAAAAAAHHH!!!");
+						puts(ERR_PREFIJO);
 						return EXIT_FAILURE;
 					}
 
