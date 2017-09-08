@@ -1,6 +1,11 @@
 # algo1-tp1-electronica
 TP 1 de Kuhn para Electronica - Cabrera; Floutard, Urquiza
 
+Antes que nada:
+-HAGAN EL TUTORIAL hello-world PRIMERO.
+-APRENDAN A USAR GitHub con Linux.
+
+
 Probaremos usar GitHub para trabajar en el proyecto juntos. Asegurarse de hacer ramas distintas para cada uno de sus trabajos y avisar antes de empezar una rama. En caso de que no este claro que quiere hacer cada uno, consultar por wpp.
 Intentemos trabajar por módulos.
 
@@ -17,4 +22,6 @@ Temas a decidir:
 2) Vectores y Matrices que usaremos.
 3) Implementacion del Menu Asignaturas
 4) Que deseamos que haga la opción 3 además de sacar un promedio.
-5) Idiomas A Armar: Español, Inglés y Francés si asi lo desean.
+5) Idiomas por desarrollar: Español, Inglés y Francés si asi lo desean.
+
+Vamos por un 10, chicos
