@@ -1,17 +1,17 @@
-#Funciones del programa
+# Funciones del programa
 
-Idea : Podemos hacer un tipo struct para el usario. POr exemplo :
+Idea : Podemos hacer un tipo struct para el usario. Pàr exemplo :
 
-typedef struct {
-  char[50] nombre;
-  int padron;
-  int carrera:
-} USARIO;
+  typedef struct {
+    char[50] nombre;
+    int padron;
+    int carrera:
+  } USARIO;
 
 Y quizas tambien utilisar esta struct para los materias tambien o hacer una otra struct...
 
 
-##Menu registro :
+## Menu registro :
 
 * Funcion general para presentar las opciones
 * Funcion para modificar apellido y nombre
@@ -19,19 +19,19 @@ Y quizas tambien utilisar esta struct para los materias tambien o hacer una otra
 * Function para modificar la carrera
 * ...
 
-##Menu asignaturas :
+## Menu asignaturas :
 
 * Funcion para anunciar las materias
 * Funcion para anadir una materia
 * Funcion para eliminar una materias
 * ...
 
-##Menu Otros
+## Menu Otros
 
 * Funcion finalizar
 * ...
 
-##Crear una archivo .h para cada idioma
+## Crear una archivo .h para cada idioma
 
 
 PS: disculpe para el espanol :P
