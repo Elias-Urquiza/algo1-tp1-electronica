@@ -1,12 +1,14 @@
 # Funciones del programa
 
-Idea : Podemos hacer un tipo struct para el usario. Pàr exemplo :
+Idea : Podemos hacer un tipo struct para el usario. Por exemplo :
 
+```C
   typedef struct {
     char[50] nombre;
     int padron;
     int carrera:
   } USARIO;
+```
 
 Y quizas tambien utilisar esta struct para los materias tambien o hacer una otra struct...
 
@@ -31,7 +33,7 @@ Y quizas tambien utilisar esta struct para los materias tambien o hacer una otra
 * Funcion finalizar
 * ...
 
-## Crear una archivo .h para cada idioma
+### Crear una archivo .h para cada idioma
 
 
 PS: disculpe para el espanol :P
