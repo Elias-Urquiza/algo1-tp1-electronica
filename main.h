@@ -16,11 +16,10 @@
 #define MAIN_OPCION_SALIR "Salir"
 
 #define ERR_PREFIJO "ERROR"
-#define ERR_OPCIONES_MAIN "Opción ingresada no válida."
+#define ERR_OPCIONES "Opción ingresada no válida."
 
 /*Tipos de clasificacion de variables personales*/
 
 typedef enum {MAIN_MENU, MENU_REGISTRO, MENU_ASIGNATURAS, MENU_OTROS, MAIN_SALIR} estado_main;
-typedef enum {VOLVER, REG_NOMBRE, REG_PADRON, REG_CARRERA, ASIGN_ING, ASIGN_MODIF} estado_opciones; /*a desarrollar*/
 
 #endif
