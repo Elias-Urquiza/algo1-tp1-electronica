@@ -12,7 +12,8 @@
 
 #define MAIN_OPCION_1 "Registro Personal"
 #define MAIN_OPCION_2 "Asignaturas"
-#define MAIN_OPCION_3 "Otros"
+#define MAIN_OPCION_3 "Métricas"
+#define MAIN_OPCION_4 "Finalizar"
 #define MAIN_OPCION_SALIR "Salir"
 
 #define ERR_PREFIJO "ERROR"
@@ -20,6 +21,6 @@
 
 /*Tipos de clasificacion de variables personales*/
 
-typedef enum {MAIN_MENU, MENU_REGISTRO, MENU_ASIGNATURAS, MENU_OTROS, MAIN_SALIR} estado_main;
+typedef enum {MAIN_MENU, MENU_REGISTRO, MENU_ASIGNATURAS, MENU_METRICAS, MENU_FINALIZAR, MAIN_SALIR} estado_main;
 
 #endif
