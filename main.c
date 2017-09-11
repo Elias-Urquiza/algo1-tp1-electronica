@@ -76,6 +76,9 @@ int main(void)
 			break;
 		}
 
+
+
+
 		case MENU_OTROS:
 		{
 			/* hacer funcion type a_discutir( variables a discutir ) */

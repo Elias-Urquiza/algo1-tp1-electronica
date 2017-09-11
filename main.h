@@ -23,4 +23,17 @@
 typedef enum {MAIN_MENU, MENU_REGISTRO, MENU_ASIGNATURAS, MENU_OTROS, MAIN_SALIR} estado_main;
 typedef enum {VOLVER, REG_NOMBRE, REG_PADRON, REG_CARRERA, ASIGN_ING, ASIGN_MODIF} estado_opciones; /*a desarrollar*/
 
+
+
+typedef struct
+{
+  char[50] nombre;
+  int padron;
+  int carrera;
+  char[10][30] asignaturas;
+  int[10] notas;
+} usario_t;
+
+
+
 #endif
