@@ -15,7 +15,7 @@ int main(void)
 			case MAIN_MENU:
 			{
 				puts(MSJ_MAIN);
-				printf("1) %s\n2) %s\n3) %s\n0) %s\n", MAIN_OPCION_1, MAIN_OPCION_2, MAIN_OPCION_3, MAIN_OPCION_SALIR);
+				printf("1) %s\n2) %s\n3) %s\n4) %s\n0) %s\n", MAIN_OPCION_1, MAIN_OPCION_2, MAIN_OPCION_3, MAIN_OPCION_4, MAIN_OPCION_SALIR);
 
 				if(scanf("%i", &input_i) != 1)
 				{
@@ -29,7 +29,9 @@ int main(void)
 				else if(input_i == 2)
 					estado = MENU_ASIGNATURAS;
 				else if(input_i == 3)
-					estado = MENU_OTROS;
+					estado = MENU_METRICAS;
+				else if(input_i == 4)
+					estado = MENU_FINALIZAR;
 				else if(input_i == 0)
 					estado = MAIN_SALIR;
 				else
@@ -76,10 +78,10 @@ int main(void)
 				break;
 			}
 
-			case MENU_OTROS:
+			case MENU_METRICAS:
 			{
 				/* hacer funcion type a_discutir( variables a discutir ) */
-				puts("Menu [FILE_NOT_FOUND]! Pulse 0 para volver y cualquier otra cosa para un error fatal!");
+				puts("Menu Métricas! Pulse 0 para volver y cualquier otra cosa para un error fatal!");
 
 				scanf("%i", &input_i);
 
@@ -94,6 +96,20 @@ int main(void)
 				break;
 			}
 
+			case MENU_FINALIZAR:
+			{
+				puts("Menu FInalizar! Aquí se imprimiran los datos calculados y se volverá a cero los valores. Pulse 0 para volver.");
+
+				scanf("%i", &input_i);
+
+				if(input_i == 0)
+					estado = MAIN_MENU;
+				else
+				{
+					puts(ERR_PREFIJO);
+					return EXIT_FAILURE;
+				}
+			}
 			case MAIN_SALIR:
 			{
 				puts(MSJ_DESPEDIDA);
