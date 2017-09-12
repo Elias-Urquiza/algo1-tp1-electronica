@@ -36,11 +36,7 @@ typedef enum
 } estado_main;
 
 
-typedef enum {
-  VOLVER, REG_NOMBRE, REG_PADRON, REG_CARRERA, ASIGN_ING, ASIGN_MODIF
-} estado_opciones; /*a desarrollar*/
-
-
+/* Estructura de datos */
 
 typedef struct
 {
