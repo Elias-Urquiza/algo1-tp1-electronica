@@ -52,6 +52,7 @@ typedef struct
 }usuario_t;
 
 
+/*funcionnes del main*/
 usuario_t reinit(usuario_t);
 void clear_buffer(void);
 
@@ -60,6 +61,14 @@ usuario_t asignaturas(usuario_t);
 usuario_t metrica(usuario_t);
 usuario_t finalizar(usuario_t);
 
+
+/*funcionnes de registro*/
+
+
+/*funcionnes de asignaturas*/
+
+
+/*funcionnes de metrica*/
 
 
 #endif
