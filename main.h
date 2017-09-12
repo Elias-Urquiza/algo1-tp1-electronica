@@ -27,6 +27,8 @@
 #define LENGTH_MAX_ASIGNATURA 30
 #define NUMERO_MAX_ASIGNATURAS 10
 
+#define MAX_TRY 3
+
 
 /*Tipos de clasificacion de variables personales*/
 
@@ -36,17 +38,12 @@ typedef enum
 } estado_main;
 
 
-typedef enum {
-  VOLVER, REG_NOMBRE, REG_PADRON, REG_CARRERA, ASIGN_ING, ASIGN_MODIF
-} estado_opciones; /*a desarrollar*/
-
-
-
 typedef struct
 {
   char nombre[LENGTH_MAX_NOMBRE];
-  int padron;
-  int carrera;
+	char apellido[LENGTH_MAX_NOMBRE];
+	int padron;
+  int num_carrera;
   char asignaturas[NUMERO_MAX_ASIGNATURAS][LENGTH_MAX_ASIGNATURA];
   int notas[NUMERO_MAX_ASIGNATURAS];
 }usuario_t;
