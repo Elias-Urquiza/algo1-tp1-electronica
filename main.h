@@ -29,15 +29,13 @@
 #define LENGTH_MAX_ASIGNATURA 30
 #define NUMERO_MAX_ASIGNATURAS 10
 
-/*Tipos de clasificacion de variables personales*/
+#define MAX_TRY 3
 
 typedef enum
 {
   MAIN_MENU, MENU_REGISTRO = MAIN_OPCION_1_CHAR, MENU_ASIGNATURAS = MAIN_OPCION_2_CHAR, MENU_METRICA = MAIN_OPCION_3_CHAR, MENU_FINALIZAR = MAIN_OPCION_FINALIZAR_CHAR, MAIN_SALIR = MAIN_OPCION_SALIR_CHAR
 } estado_main;
 
-
-/* Estructura de datos */
 
 typedef struct
 {

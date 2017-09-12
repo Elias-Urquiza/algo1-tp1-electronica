@@ -9,6 +9,7 @@ int main(void)
 	estado_main estado = MAIN_MENU;
 	char letter = '\0';
 	usuario_t alumno;
+	int i = 0;
 
 	alumno = reinit(alumno);
 
@@ -23,7 +24,9 @@ int main(void)
 			puts(MSJ_MAIN);
 			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n", MAIN_OPCION_1_CHAR, MAIN_OPCION_1, MAIN_OPCION_2_CHAR, MAIN_OPCION_2, MAIN_OPCION_3_CHAR, MAIN_OPCION_3, MAIN_OPCION_FINALIZAR_CHAR, MAIN_OPCION_FINALIZAR, MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
 
-			while((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
+			letter = '\0';
+			i = 0;
+			while((i < MAX_TRY) && (letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
 			{
 				scanf("%c", &letter);
 				if((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
@@ -31,10 +34,10 @@ int main(void)
 					fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
 				}
 				clear_buffer();
+				i++;
 			}
 
 			estado = letter;
-			letter = '\0';
 			break;
 		}
 
