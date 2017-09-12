@@ -24,9 +24,10 @@
 
 /*Parametros de usuario_t*/
 #define LENGTH_MAX_NOMBRE 50
+#define LENGTH_MAX_CARRERAS 12
+#define LENGTH_MAX_NOMBRE_CARRERAS 30
 #define LENGTH_MAX_ASIGNATURA 30
 #define NUMERO_MAX_ASIGNATURAS 10
-
 
 /*Tipos de clasificacion de variables personales*/
 
@@ -41,8 +42,9 @@ typedef enum
 typedef struct
 {
   char nombre[LENGTH_MAX_NOMBRE];
-  int padron;
-  int carrera;
+	char apellido[LENGTH_MAX_NOMBRE];
+	int padron;
+  int num_carrera;
   char asignaturas[NUMERO_MAX_ASIGNATURAS][LENGTH_MAX_ASIGNATURA];
   int notas[NUMERO_MAX_ASIGNATURAS];
 }usuario_t;
@@ -51,8 +53,9 @@ typedef struct
 /*funcionnes del main*/
 usuario_t reinit(usuario_t);
 void clear_buffer(void);
+void imprimir_carrera(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
-usuario_t registro(usuario_t);
+usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 usuario_t asignaturas(usuario_t);
 usuario_t metrica(usuario_t);
 usuario_t finalizar(usuario_t);
