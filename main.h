@@ -27,7 +27,6 @@
 #define LENGTH_MAX_ASIGNATURA 30
 #define NUMERO_MAX_ASIGNATURAS 10
 
-
 /*Tipos de clasificacion de variables personales*/
 
 typedef enum
@@ -58,7 +57,6 @@ void clear_buffer(void);
 usuario_t registro(usuario_t);
 usuario_t asignaturas(usuario_t);
 usuario_t otros(usuario_t);
-
 
 
 #endif
