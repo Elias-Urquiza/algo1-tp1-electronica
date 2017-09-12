@@ -24,12 +24,13 @@
 
 /*Parametros de usuario_t*/
 #define LENGTH_MAX_NOMBRE 50
-#define LENGTH_MAX_CARRERAS 12
-#define LENGTH_MAX_NOMBRE_CARRERAS 30
 #define LENGTH_MAX_ASIGNATURA 30
 #define NUMERO_MAX_ASIGNATURAS 10
 
 #define MAX_TRY 3
+
+
+/*Tipos de clasificacion de variables personales*/
 
 typedef enum
 {
@@ -51,9 +52,8 @@ typedef struct
 /*funcionnes del main*/
 usuario_t reinit(usuario_t);
 void clear_buffer(void);
-void imprimir_carrera(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
-usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
+usuario_t registro(usuario_t);
 usuario_t asignaturas(usuario_t);
 usuario_t metrica(usuario_t);
 usuario_t finalizar(usuario_t);
@@ -65,7 +65,15 @@ usuario_t finalizar(usuario_t);
 /*funcionnes de asignaturas*/
 
 
-/*funcionnes de metrica*/
+/*funcionnes y tipos de metrica*/
+typedef enum
+{
+	MAIN_METRICA, PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, MAXIMO = METRICA_OPCION_MAXIMO_CHAR, MINIMO = METRICA_OPCION_MINIMO_CHAR, CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, VOLVER = METRICA_OPCION_VOLVER_CHAR
+}estado_metrica;
 
+float promedio(usuario_t, int);
+int cantidad(usuario_t);
+int maximo(usuario_t, int);
+int minimo(usuario_t, int);
 
 #endif

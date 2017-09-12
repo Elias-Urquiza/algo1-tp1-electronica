@@ -1,32 +1,5 @@
 #include "main.h"
 
-#define MSJ_METRICA "Metrica :"
-#define METRICA_OPCION_PROMEDIO "Promedio"
-#define METRICA_OPCION_PROMEDIO_CHAR 'P'
-#define METRICA_OPCION_MAXIMO "Maximo"
-#define METRICA_OPCION_MAXIMO_CHAR 'M'
-#define METRICA_OPCION_MINIMO "Minimo"
-#define METRICA_OPCION_MINIMO_CHAR 'm'
-#define METRICA_OPCION_CANTIDAD "Cantidad de materias"
-#define METRICA_OPCION_CANTIDAD_CHAR '#'
-#define METRICA_OPCION_VOLVER "Volver"
-#define METRICA_OPCION_VOLVER_CHAR '0'
-
-#define MSJ_PROMEDIO "El promedio es de : "
-#define MSJ_MAXIMO "La asignaturas con la mejor nota es : "
-#define MSJ_MINIMO "La asignaturas con la peor nota es : "
-#define MSJ_CANTIDAD "La cantidad de materia es : "
-
-
-float promedio(usuario_t, int);
-int cantidad(usuario_t);
-int maximo(usuario_t, int);
-int minimo(usuario_t, int);
-
-typedef enum
-{
-	MAIN_METRICA, PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, MAXIMO = METRICA_OPCION_MAXIMO_CHAR, MINIMO = METRICA_OPCION_MINIMO_CHAR, CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, VOLVER = METRICA_OPCION_VOLVER_CHAR
-}estado_metrica;
 
 usuario_t metrica (usuario_t usuario)
 {
