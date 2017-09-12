@@ -27,11 +27,12 @@
 #define LENGTH_MAX_ASIGNATURA 30
 #define NUMERO_MAX_ASIGNATURAS 10
 
+
 /*Tipos de clasificacion de variables personales*/
 
 typedef enum
 {
-  MAIN_MENU, MENU_REGISTRO = MAIN_OPCION_1_CHAR, MENU_ASIGNATURAS = MAIN_OPCION_2_CHAR, MENU_OTROS = MAIN_OPCION_3_CHAR, MAIN_SALIR = MAIN_OPCION_SALIR_CHAR
+  MAIN_MENU, MENU_REGISTRO = MAIN_OPCION_1_CHAR, MENU_ASIGNATURAS = MAIN_OPCION_2_CHAR, MENU_METRICA = MAIN_OPCION_3_CHAR, MENU_FINALIZAR = MAIN_OPCION_FINALIZAR_CHAR, MAIN_SALIR = MAIN_OPCION_SALIR_CHAR
 } estado_main;
 
 
@@ -51,12 +52,23 @@ typedef struct
 }usuario_t;
 
 
+/*funcionnes del main*/
 usuario_t reinit(usuario_t);
 void clear_buffer(void);
 
 usuario_t registro(usuario_t);
 usuario_t asignaturas(usuario_t);
-usuario_t otros(usuario_t);
+usuario_t metrica(usuario_t);
+usuario_t finalizar(usuario_t);
+
+
+/*funcionnes de registro*/
+
+
+/*funcionnes de asignaturas*/
+
+
+/*funcionnes de metrica*/
 
 
 #endif

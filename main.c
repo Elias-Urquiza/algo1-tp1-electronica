@@ -4,7 +4,7 @@
 int main(void)
 {
 	estado_main estado = MAIN_MENU;
-	char letter = 'W';
+	char letter = '\0';
 	usuario_t alumno;
 
 	alumno = reinit(alumno);
@@ -18,18 +18,18 @@ int main(void)
 		case MAIN_MENU:
 		{
 			puts(MSJ_MAIN);
-			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n", MAIN_OPCION_1_CHAR, MAIN_OPCION_1, MAIN_OPCION_2_CHAR, MAIN_OPCION_2, MAIN_OPCION_3_CHAR, MAIN_OPCION_3, MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
+			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n", MAIN_OPCION_1_CHAR, MAIN_OPCION_1, MAIN_OPCION_2_CHAR, MAIN_OPCION_2, MAIN_OPCION_3_CHAR, MAIN_OPCION_3, MAIN_OPCION_FINALIZAR_CHAR, MAIN_OPCION_FINALIZAR, MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
 
-			while((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) & (letter != MAIN_OPCION_SALIR_CHAR))
+			while((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
 			{
 				scanf("%c", &letter);
-				if((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) & (letter != MAIN_OPCION_SALIR_CHAR))
+				if((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
 					printf("%s: %s\n", ERR_PREFIJO, ERR_OPCIONES_MAIN);
 				clear_buffer();
 			}
 
 			estado = letter;
-			letter = 'W';
+			letter = '\0';
 			break;
 		}
 
@@ -47,9 +47,16 @@ int main(void)
 			break;
 		}
 
-		case MENU_OTROS:
+		case MENU_METRICA:
 		{
-			alumno = otros(alumno); /*function de aurelien*/
+			alumno = metrica(alumno); /*function de aurelien*/
+			estado = MAIN_MENU;
+			break;
+		}
+
+		case MENU_FINALIZAR:
+		{
+			alumno = finalizar(alumno);
 			estado = MAIN_MENU;
 			break;
 		}
@@ -59,7 +66,7 @@ int main(void)
 			puts(MSJ_DESPEDIDA);
 			return EXIT_SUCCESS;
 		}
-        
+
 		}
 	}
 
