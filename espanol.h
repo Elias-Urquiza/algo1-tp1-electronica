@@ -20,7 +20,7 @@
 #define MAIN_OPCION_1_CHAR 'R'
 #define MAIN_OPCION_2 "Asignaturas"
 #define MAIN_OPCION_2_CHAR 'A'
-#define MAIN_OPCION_3 "Calcular m é trica individual"
+#define MAIN_OPCION_3 "Calcular métrica individual"
 #define MAIN_OPCION_3_CHAR 'M'
 #define MAIN_OPCION_FINALIZAR "Finalizar"
 #define MAIN_OPCION_FINALIZAR_CHAR '!'
