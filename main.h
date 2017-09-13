@@ -27,8 +27,10 @@
 #define LENGTH_MAX_ASIGNATURA 30
 #define NUMERO_MAX_ASIGNATURAS 10
 
+/* Otros parametros */
 #define MAX_TRY 3
-
+#define LENGTH_MAX_CARRERAS 12
+#define LENGTH_MAX_NOMBRE_CARRERAS 30
 
 /*Tipos de clasificacion de variables personales*/
 
@@ -52,15 +54,14 @@ typedef struct
 /*funcionnes del main*/
 usuario_t reinit(usuario_t);
 void clear_buffer(void);
-
-usuario_t registro(usuario_t);
+usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 usuario_t asignaturas(usuario_t);
 usuario_t metrica(usuario_t);
 usuario_t finalizar(usuario_t);
 
 
 /*funcionnes de registro*/
-
+void imprimir_carrera(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
 /*funcionnes de asignaturas*/
 
