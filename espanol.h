@@ -9,7 +9,7 @@
 
 /*Errores*/
 #define ERR_PREFIJO "ERROR"
-#define ERR_OPCIONES "Opción ingresada no válida, intenta de nuevo"
+#define ERR_OPCIONES "Opción ingresada no válida, intenta de nuevo."
 
 #define ERR_REG_NOMBRE "No se pudo leer el nombre ingresado."
 #define ERR_REG_PADRON "El padrón ingresado no se pudo leer."
