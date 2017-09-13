@@ -69,12 +69,13 @@ void imprimir_carrera(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 /*funcionnes y tipos de metrica*/
 typedef enum
 {
-	MAIN_METRICA, PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, MAXIMO = METRICA_OPCION_MAXIMO_CHAR, MINIMO = METRICA_OPCION_MINIMO_CHAR, CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, VOLVER = METRICA_OPCION_VOLVER_CHAR
+	MAIN_METRICA, PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, MAXIMO = METRICA_OPCION_MAXIMO_CHAR, MINIMO = METRICA_OPCION_MINIMO_CHAR, CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, APLAZOS = METRICA_OPCION_APLAZOS_CHAR, VOLVER = METRICA_OPCION_VOLVER_CHAR
 }estado_metrica;
 
 float promedio(usuario_t, int);
 int cantidad(usuario_t);
 int maximo(usuario_t, int);
 int minimo(usuario_t, int);
+int aplazos(usuario_t, int);
 
 #endif

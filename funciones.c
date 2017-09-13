@@ -13,14 +13,14 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 	while(1)
 	{
-		printf("\t%s\n\t%s\n\t%s\n\t%s\n", REGISTRO_OPCION_NOMBRE, REGISTRO_OPCION_PADRON, REGISTRO_OPCION_CARRERA, REGISTRO_OPCION_VOLVER);
+		printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ",REGISTRO_OPCION_NOMBRE_CHAR, REGISTRO_OPCION_NOMBRE, REGISTRO_OPCION_PADRON_CHAR, REGISTRO_ING_PADRON, REGISTRO_OPCION_CARRERA_CHAR, REGISTRO_OPCION_CARRERA, REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
 
 		if(scanf("%i", &input_i) != 1)
 		{
 			fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
 			/*ERROR REVISAR QUE HACER AQUI AURELIEN!*/
 		}
-		while(getchar() != '\n') ;
+		clear_buffer();
 
 		if(input_i == 1)
 		{
@@ -88,6 +88,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 
 
+
 /* ASIGNATURAS */
 
 /*-------------------------------------------------------*/
@@ -95,6 +96,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 
 /*-------------------------------------------------------*/
+
 
 
 
@@ -124,15 +126,15 @@ usuario_t metrica (usuario_t usuario)
 		{
 
 			puts(MSJ_METRICA);
-			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO, METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO, METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO, METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD, METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
+			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO, METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO, METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO, METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD, METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS, METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
 
 			letter = '\0';
 			i = 0;
 
-			while((i < MAX_TRY) && (letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
+			while((i < MAX_TRY) && (letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
 			{
 				scanf("%c", &letter);
-				if((letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
+				if((letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
 					printf("%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
 				clear_buffer();
 				i++;
@@ -177,6 +179,14 @@ usuario_t metrica (usuario_t usuario)
 			break;
 		}
 
+		case APLAZOS:
+		{
+			printf(MSJ_APLAZOS);
+			printf("%i\n", aplazos(usuario, cantidadAsignaturas));
+			estado = MAIN_METRICA;
+			break;
+		}
+
 		case VOLVER:
 		{
 			NULL;
@@ -187,6 +197,7 @@ usuario_t metrica (usuario_t usuario)
 	}
 
 	return usuario;
+
 }
 
 
@@ -241,8 +252,41 @@ int minimo(usuario_t usuario, int cantidadAsignaturas)
 }
 
 
+int aplazos(usuario_t usuario, int cantidadAsignaturas)
+{
+	int i, numero = 0;
+
+	for(i = 0; i < cantidadAsignaturas; i++)
+	{
+		if (usuario.notas[i] < 4)
+			numero++;
+	}
+
+	return numero;
+}
+
 /*-------------------------------------------------------*/
 
+
+
+
+
+
+
+
+/* FINALIZAR */
+
+/*-------------------------------------------------------*/
+
+usuario_t finalizar(usuario_t usuario)
+{
+	int cantidadAsignaturas = cantidad(usuario);
+	printf("%s %s, %i, %i, %i, %.2f, %i\n", usuario.nombre, usuario.apellido, usuario.padron, usuario.num_carrera, cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas));
+	fprintf(stderr, "%s %s, %i, %i, %i, %.2f, %i\n", usuario.nombre, usuario.apellido, usuario.padron, usuario.num_carrera, cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas));
+	return reinit(usuario);
+}
+
+/*-------------------------------------------------------*/
 
 
 

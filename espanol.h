@@ -43,10 +43,14 @@
 
 /* MSJ registro */
 #define MSJ_REGISTRO "Menu Registro. Elija una opción para modificar los datos ingresados."
-#define REGISTRO_OPCION_NOMBRE "1) Apellido y Nombre"
-#define REGISTRO_OPCION_PADRON "2) Padrón"
-#define REGISTRO_OPCION_CARRERA "3) Carrera"
-#define REGISTRO_OPCION_VOLVER "0) Volver"
+#define REGISTRO_OPCION_NOMBRE "Apellido y Nombre"
+#define REGISTRO_OPCION_NOMBRE_CHAR 'A'
+#define REGISTRO_OPCION_PADRON "Padrón"
+#define REGISTRO_OPCION_PADRON_CHAR '#'
+#define REGISTRO_OPCION_CARRERA "Carrera"
+#define REGISTRO_OPCION_CARRERA_CHAR 'C'
+#define REGISTRO_OPCION_VOLVER "Volver"
+#define REGISTRO_OPCION_VOLVER_CHAR '0'
 
 #define REGISTRO_ING_APELLIDO "Ingrese Apellido"
 #define REGISTRO_ING_NOMBRE "Ingrese Nombre"
@@ -65,6 +69,8 @@
 #define METRICA_OPCION_MINIMO_CHAR 'm'
 #define METRICA_OPCION_CANTIDAD "Cantidad de materias"
 #define METRICA_OPCION_CANTIDAD_CHAR '#'
+#define METRICA_OPCION_APLAZOS "Aplazos"
+#define METRICA_OPCION_APLAZOS_CHAR 'A'
 #define METRICA_OPCION_VOLVER "Volver"
 #define METRICA_OPCION_VOLVER_CHAR '0'
 
@@ -72,5 +78,6 @@
 #define MSJ_MAXIMO "La asignaturas con la mejor nota es : "
 #define MSJ_MINIMO "La asignaturas con la peor nota es : "
 #define MSJ_CANTIDAD "La cantidad de materia es : "
+#define MSJ_APLAZOS "Cantidad de materias aplaza" /*no sé como se dice ^^*/
 
 #endif

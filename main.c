@@ -21,7 +21,7 @@ int main(void)
 		case MAIN_MENU:
 		{
 			puts(MSJ_MAIN);
-			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n", MAIN_OPCION_1_CHAR, MAIN_OPCION_1, MAIN_OPCION_2_CHAR, MAIN_OPCION_2, MAIN_OPCION_3_CHAR, MAIN_OPCION_3, MAIN_OPCION_FINALIZAR_CHAR, MAIN_OPCION_FINALIZAR, MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
+			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", MAIN_OPCION_1_CHAR, MAIN_OPCION_1, MAIN_OPCION_2_CHAR, MAIN_OPCION_2, MAIN_OPCION_3_CHAR, MAIN_OPCION_3, MAIN_OPCION_FINALIZAR_CHAR, MAIN_OPCION_FINALIZAR, MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
 
 			letter = '\0';
 			i = 0;
@@ -64,8 +64,7 @@ int main(void)
 
 		case MENU_FINALIZAR:
 		{
-			/*
-			   alumno = finalizar(alumno); */
+			alumno = finalizar(alumno);
 			estado = MAIN_MENU;
 			break;
 		}
