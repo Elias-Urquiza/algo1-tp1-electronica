@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 /* REGISTRO */
 
 /*-------------------------------------------------------*/
@@ -12,7 +13,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 	while(1)
 	{
-		printf("%s\n%s\n%s\n%s\n", REGISTRO_OPCION_NOMBRE, REGISTRO_OPCION_PADRON, REGISTRO_OPCION_CARRERA, REGISTRO_OPCION_VOLVER);
+		printf("\t%s\n\t%s\n\t%s\n\t%s\n", REGISTRO_OPCION_NOMBRE, REGISTRO_OPCION_PADRON, REGISTRO_OPCION_CARRERA, REGISTRO_OPCION_VOLVER);
 
 		if(scanf("%i", &input_i) != 1)
 		{
