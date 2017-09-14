@@ -7,7 +7,7 @@
 
 usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 {
-	int input_i = 0;
+	char input_i = 0;
 
 	puts(MSJ_REGISTRO);
 
@@ -15,14 +15,14 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 	{
 		printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ",REGISTRO_OPCION_NOMBRE_CHAR, REGISTRO_OPCION_NOMBRE, REGISTRO_OPCION_PADRON_CHAR, REGISTRO_ING_PADRON, REGISTRO_OPCION_CARRERA_CHAR, REGISTRO_OPCION_CARRERA, REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
 
-		if(scanf("%i", &input_i) != 1)
+		if(scanf("%c", &input_i) != 1)
 		{
 			fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
 			/*ERROR REVISAR QUE HACER AQUI AURELIEN!*/
 		}
 		clear_buffer();
 
-		if(input_i == 1)
+		if(input_i == REGISTRO_OPCION_NOMBRE_CHAR)
 		{
 			printf("%s: ", REGISTRO_ING_APELLIDO);
 			if(scanf("%s", usuario.apellido) != 1)
@@ -43,7 +43,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 			printf("%s: %s, %s\n", REGISTRO_ING_AVISO, usuario.apellido, usuario.nombre);
 		}
-		else if(input_i == 2) /*Ingresa padron*/
+		else if(input_i == REGISTRO_OPCION_PADRON_CHAR) /*Ingresa padron*/
 		{
 			printf("%s: ", REGISTRO_ING_PADRON);
 			if(scanf("%i", &usuario.padron) != 1)
@@ -54,7 +54,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			while(getchar() != '\n') ;
 			printf("%s: %i\n", REGISTRO_ING_AVISO, usuario.padron);
 		}
-		else if(input_i == 3) /*Pide numero de carrera para identificar que nombre de la matriz carreras usar*/
+		else if(input_i == REGISTRO_OPCION_CARRERA_CHAR) /*Pide numero de carrera para identificar que nombre de la matriz carreras usar*/
 		{
 			printf("%s: ", REGISTRO_ING_CARRERA);
 			if(scanf("%i", &usuario.num_carrera) != 1)
@@ -67,7 +67,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			printf("%s: ", REGISTRO_ING_AVISO);
 			imprimir_carrera(usuario.num_carrera, carreras);
 		}
-		else if(input_i == 0) /*Sale del loop y permite terminar la funcion registro*/
+		else if(input_i == REGISTRO_OPCION_VOLVER_CHAR) /*Sale del loop y permite terminar la funcion registro*/
 		{
 			break;
 		}
@@ -135,9 +135,13 @@ usuario_t metrica (usuario_t usuario)
 			{
 				scanf("%c", &letter);
 				if((letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
+				{
 					printf("%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+					i++;
+					if (i >= 3)
+						letter = '0';
+				}
 				clear_buffer();
-				i++;
 			}
 
 			estado = letter;
