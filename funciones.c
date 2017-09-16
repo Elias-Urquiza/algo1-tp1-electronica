@@ -331,7 +331,14 @@ usuario_t reinit(usuario_t usuario)
 
 void imprimir_carrera(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 {
-	printf("%s\n", carreras[fila]); /*Imprime la carrera correspondiente a lo ingresado*/
+	if(fila < 0 || fila > 12)
+	{
+		puts(ERR_REG_CARRERA);
+	}
+	else
+	{
+		printf("%s\n", carreras[fila]); /*Imprime la carrera correspondiente a lo ingresado*/
+	}
 }
 
 void clear_buffer(void)

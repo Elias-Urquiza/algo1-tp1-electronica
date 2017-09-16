@@ -1,11 +1,10 @@
-#ifndef ESPANOL_H
-#define ESPANOL_H
+#ifndef ESPANOL__H
+#define ESPANOL__H
 
 
 /* MSJ global */
 #define MSJ_BIENVENIDA "¡Bienvenido!"
 #define MSJ_MAIN "Elija que desea hacer:"
-#define MSJ_DESPEDIDA "¡Hasta Luego!"
 
 /*Errores*/
 #define ERR_PREFIJO "ERROR"
@@ -13,7 +12,7 @@
 
 #define ERR_REG_NOMBRE "No se pudo leer el nombre ingresado."
 #define ERR_REG_PADRON "El padrón ingresado no se pudo leer."
-#define ERR_REG_CARRERA "El número de carrera ingresado no es válido."
+#define ERR_REG_CARRERA "Número de Carrera Inválido."
 
 /* MSJ main */
 #define MAIN_OPCION_1 "Registro Personal"
@@ -60,7 +59,7 @@
 #define REGISTRO_ING_AVISO "Queda registrado lo siguiente"
 
 /* MSJ de metricas */
-#define MSJ_METRICA "Metrica :"
+#define MSJ_METRICA "Metrica:"
 #define METRICA_OPCION_PROMEDIO "Promedio"
 #define METRICA_OPCION_PROMEDIO_CHAR 'P'
 #define METRICA_OPCION_MAXIMO "Maximo"
@@ -74,10 +73,10 @@
 #define METRICA_OPCION_VOLVER "Volver"
 #define METRICA_OPCION_VOLVER_CHAR '0'
 
-#define MSJ_PROMEDIO "El promedio es de : "
-#define MSJ_MAXIMO "La asignaturas con la mejor nota es : "
-#define MSJ_MINIMO "La asignaturas con la peor nota es : "
-#define MSJ_CANTIDAD "La cantidad de materia es : "
-#define MSJ_APLAZOS "Cantidad de materias aplaza" /*no sé como se dice ^^*/
+#define MSJ_PROMEDIO "El promedio es de: "
+#define MSJ_MAXIMO "La asignatura con la mejor nota es: "
+#define MSJ_MINIMO "La asignatura con la peor nota es: "
+#define MSJ_CANTIDAD "La cantidad de materias cursadas es: "
+#define MSJ_APLAZOS "La cantidad de aplazos es: "
 
 #endif
