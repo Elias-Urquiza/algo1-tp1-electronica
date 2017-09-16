@@ -333,7 +333,7 @@ void imprimir_carrera(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 {
 	if(fila < 0 || fila > 12)
 	{
-		puts(MSJ_ERROR_CARRERA);
+		puts(ERR_REG_CARRERA);
 	}
 	else
 	{
