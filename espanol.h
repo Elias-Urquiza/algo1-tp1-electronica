@@ -12,7 +12,7 @@
 
 #define ERR_REG_NOMBRE "No se pudo leer el nombre ingresado."
 #define ERR_REG_PADRON "El padrón ingresado no se pudo leer."
-#define ERR_REG_CARRERA "El número de carrera ingresado no es válido."
+#define ERR_REG_CARRERA "Número de Carrera Inválido."
 
 /* MSJ main */
 #define MAIN_OPCION_1 "Registro Personal"
@@ -73,10 +73,10 @@
 #define METRICA_OPCION_VOLVER "Volver"
 #define METRICA_OPCION_VOLVER_CHAR '0'
 
-#define MSJ_PROMEDIO "El promedio es de : "
-#define MSJ_MAXIMO "La asignaturas con la mejor nota es : "
-#define MSJ_MINIMO "La asignaturas con la peor nota es : "
-#define MSJ_CANTIDAD "La cantidad de materia es : "
-#define MSJ_APLAZOS "Cantidad de materias aplaza" /*no sé como se dice ^^*/
+#define MSJ_PROMEDIO "El promedio es de: "
+#define MSJ_MAXIMO "La asignaturas con la mejor nota es: "
+#define MSJ_MINIMO "La asignaturas con la peor nota es: "
+#define MSJ_CANTIDAD "La cantidad de materia es: "
+#define MSJ_APLAZOS "La cantidad de materias aplazadas es:" /*no sé como se dice ^^*/
 
 #endif
