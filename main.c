@@ -73,7 +73,6 @@ int main(void)
 
 		case MAIN_SALIR:
 		{
-			puts(MSJ_DESPEDIDA);
 			return EXIT_SUCCESS;
 		}
 
