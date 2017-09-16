@@ -5,7 +5,6 @@
 /* MSJ global */
 #define MSJ_BIENVENIDA "¡Bienvenido!"
 #define MSJ_MAIN "Elija que desea hacer:"
-#define MSJ_DESPEDIDA "¡Hasta Luego!"
 
 /*Errores*/
 #define ERR_PREFIJO "ERROR"
