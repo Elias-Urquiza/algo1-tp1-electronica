@@ -64,7 +64,11 @@ usuario_t finalizar(usuario_t);
 void imprimir_carrera(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
 /*funcionnes de asignaturas*/
-
+void print_opciones(char materia[][LENGTH_MAX_ASIGNATURA],int nota[], int COLUMNA_IMP, int CANT);
+void clear_notas(int nota[], int FILA_NOT);
+void clear_materias(char materia[][LENGTH_MAX_ASIGNATURA], int FILA_MAT, int COLUM_MAT);
+void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BORR);
+usuario_t asignaturas(usuario_t usuario);
 
 /*funcionnes y tipos de metrica*/
 typedef enum
