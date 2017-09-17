@@ -10,6 +10,13 @@
 #define ERR_PREFIJO "ERROR"
 #define ERR_OPCIONES "Opción ingresada no válida, intenta de nuevo."
 
+#define ERR_INGRESO_MATERIA "La asignatura fue mal ingresada."
+#define ERR_INGRESO_NOTA "La nota fue mal ingresada."
+#define ERR_INGRESO_CONT_NOTA "La nota fue mal ingresada, por favor vuelva a intentar: "
+#define ERR_REINGRESO_CONT_NOTA "La rescritura de la materia fue de manera incorrecta"
+#define ERR_ELEC "La eleccion realizada no esta permitida."
+#define ERR_MAX_NOTA "Se a llegado a la maxima cantidad de asignaturas ingresada."
+
 #define ERR_REG_NOMBRE "No se pudo leer el nombre ingresado."
 #define ERR_REG_PADRON "El padrón ingresado no se pudo leer."
 #define ERR_REG_CARRERA "Número de Carrera Inválido."
@@ -39,6 +46,28 @@
 #define ING_9 "Lic. en Análisis de Sistemas"
 #define ING_10 "Ingeniería en Informática"
 #define ING_11 "Ingeniería en Alimentos"
+
+
+/* MSJ asignatura */
+#define ASIGNATURA_OPCION_INGRESO "+)Ingreso de asignatura."
+#define ASIGNATURA_OPCION_SALIDA "!)Salir."
+#define ASIGNATURA_OPCION_BORRAR "-)Eliminar una asignatura."
+#define ASIGNATURA_OPCION_PREGUNTA "? "
+#define TEXT_NOTA "Ingrese la nota: "
+#define TEXT_MATERIA "Ingrese la asignatura: "
+#define TEXT_ELEC_BORRAR "Ingrese el numero de asignaturas que desea borrar: "
+
+#define OUT 0
+#define IN 1
+
+#define MAX_CALIF 10
+#define MIN_CANLIF 0
+#define AGREGAR '+'
+#define ELIMINAR '-'
+#define SALIR '!'
+#define CANTIDAD_INTENTOS 3
+#define CERO 48
+#define UNO 1
 
 /* MSJ registro */
 #define MSJ_REGISTRO "Menu Registro. Elija una opción para modificar los datos ingresados."
