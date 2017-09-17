@@ -80,6 +80,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 			printf("%s: ", REGISTRO_ING_AVISO);
 			imprimir_carrera(usuario.num_carrera, carreras);
+			printf("\n");
 		}
 
 /*Sale del loop y permite terminar la funcion registro*/
@@ -330,6 +331,7 @@ void print_opciones(char materia[][LENGTH_MAX_ASIGNATURA], int nota[], int COLUM
 void clear_notas(int nota[], int FILA_NOT)
 {
 	int FILA;
+	
 	for(FILA=0; FILA<FILA_NOT; FILA++)
 	{
 		nota[FILA]='\0';
@@ -389,92 +391,92 @@ usuario_t metrica (usuario_t usuario)
 	{
 		switch(estado)
 		{
-		case MAIN_METRICA:
-		{
-
-			puts(MSJ_METRICA);
-			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO, METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO, METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO, METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD, METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS, METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
-
-			letter = '\0';
-			i = 0;
-
-			while((i < MAX_TRY) && (letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
+			case MAIN_METRICA:
 			{
-				scanf("%c", &letter);
-				if((letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
+
+				puts(MSJ_METRICA);
+				printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO, METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO, METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO, METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD, METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS, METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
+
+				letter = '\0';
+				i = 0;
+
+				while((i < MAX_TRY) && (letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
 				{
-					printf("%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-					i++;
-					if (i >= 3)
-						letter = '0';
+					scanf("%c", &letter);
+					if((letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
+					{
+						printf("%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+						i++;
+						if (i >= 3)
+							letter = '0';
+					}
+					clear_buffer();
 				}
-				clear_buffer();
+
+				estado = letter;
+				break;
 			}
 
-			estado = letter;
-			break;
-		}
-
-		case PROMEDIO:
-		{
-			printf(MSJ_PROMEDIO);
-			promedioAsignaturas = promedio(usuario, cantidadAsignaturas);
-			printf("%.1f\n", promedioAsignaturas);
-			estado = MAIN_METRICA;
-			break;
-		}
-
-		case MAXIMO:
-		{
-			printf(MSJ_MAXIMO);
-			index = maximo(usuario, cantidadAsignaturas);
-
-			for( i = 0; usuario.asignaturas[index][i + 1] != '\0'; i++)
+			case PROMEDIO:
 			{
-				printf("%c", usuario.asignaturas[index][i]);
+				printf(MSJ_PROMEDIO);
+				promedioAsignaturas = promedio(usuario, cantidadAsignaturas);
+				printf("%.1f\n", promedioAsignaturas);
+				estado = MAIN_METRICA;
+				break;
 			}
-			printf(" (%i)\n", usuario.notas[index]);
 
-			estado = MAIN_METRICA;
-			break;
-		}
-
-		case MINIMO:
-		{
-			printf(MSJ_MINIMO);
-			index = minimo(usuario, cantidadAsignaturas);
-
-			for( i = 0; usuario.asignaturas[index][i + 1] != '\0'; i++)
+			case MAXIMO:
 			{
-				printf("%c", usuario.asignaturas[index][i]);
+				printf(MSJ_MAXIMO);
+				index = maximo(usuario, cantidadAsignaturas);
+
+				for( i = 0; usuario.asignaturas[index][i + 1] != '\0'; i++)
+				{
+					printf("%c", usuario.asignaturas[index][i]);
+				}
+				printf(" (%i)\n", usuario.notas[index]);
+
+				estado = MAIN_METRICA;
+				break;
 			}
-			printf(" (%i)\n", usuario.notas[index]);
 
-			estado = MAIN_METRICA;
-			break;
-		}
+			case MINIMO:
+			{
+				printf(MSJ_MINIMO);
+				index = minimo(usuario, cantidadAsignaturas);
 
-		case CANTIDAD:
-		{
-			printf(MSJ_CANTIDAD);
-			printf("%i\n", cantidadAsignaturas);
-			estado = MAIN_METRICA;
-			break;
-		}
+				for( i = 0; usuario.asignaturas[index][i + 1] != '\0'; i++)
+				{
+					printf("%c", usuario.asignaturas[index][i]);
+				}
+				printf(" (%i)\n", usuario.notas[index]);
 
-		case APLAZOS:
-		{
-			printf(MSJ_APLAZOS);
-			printf("%i\n", aplazos(usuario, cantidadAsignaturas));
-			estado = MAIN_METRICA;
-			break;
-		}
+				estado = MAIN_METRICA;
+				break;
+			}
 
-		case VOLVER:
-		{
-			NULL;
-			break;
-		}
+			case CANTIDAD:
+			{
+				printf(MSJ_CANTIDAD);
+				printf("%i\n", cantidadAsignaturas);
+				estado = MAIN_METRICA;
+				break;
+			}
+
+			case APLAZOS:
+			{
+				printf(MSJ_APLAZOS);
+				printf("%i\n", aplazos(usuario, cantidadAsignaturas));
+				estado = MAIN_METRICA;
+				break;
+			}
+
+			case VOLVER:
+			{
+				NULL;
+				break;
+			}
 
 		}
 	}
@@ -567,10 +569,10 @@ int aplazos(usuario_t usuario, int cantidadAsignaturas)
 
 /*-------------------------------------------------------*/
 
-usuario_t finalizar(usuario_t usuario)
+usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 {
 	int cantidadAsignaturas = cantidad(usuario);
-	fprintf(stderr, "%s %s, %i, %i, %i, %.2f, %i\n", usuario.nombre, usuario.apellido, usuario.padron, usuario.num_carrera, cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas));
+	fprintf(stderr, "%s %s, %i, %s, %i, %.2f, %i\n", usuario.nombre, usuario.apellido, usuario.padron, imprimir_carrera(usuario.num_carrera, carreras), cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas));
 	return reinit(usuario);
 }
 
@@ -621,7 +623,7 @@ void imprimir_carrera(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 	}
 	else
 	{
-		printf("%s\n", carreras[fila]); /*Imprime la carrera correspondiente a lo ingresado*/
+		printf("%s", carreras[fila]); /*Imprime la carrera correspondiente a lo ingresado*/
 	}
 }
 
