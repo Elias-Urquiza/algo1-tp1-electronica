@@ -78,24 +78,27 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			}
 			while(getchar() != '\n') ;
 
-			printf("%s: ", REGISTRO_ING_AVISO);
 			imprimir_carrera(usuario.num_carrera, carreras);
+
 			printf("\n");
 		}
 
 /*Sale del loop y permite terminar la funcion registro*/
 		else if(input_i == REGISTRO_OPCION_VOLVER_CHAR)
+		{
 			break;
+		}
+
+		else
+		{
+			fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+		}
 	}
 
-	else
-	{
-		fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-	}
+	return usuario;         /* Solo se sale exitosamente si se activa el break; */
 }
 
-return usuario;         /* Solo se sale exitosamente si se activa el break; */
-}
+
 
 /*-------------------------------------------------------*/
 
@@ -331,7 +334,7 @@ void print_opciones(char materia[][LENGTH_MAX_ASIGNATURA], int nota[], int COLUM
 void clear_notas(int nota[], int FILA_NOT)
 {
 	int FILA;
-	
+
 	for(FILA=0; FILA<FILA_NOT; FILA++)
 	{
 		nota[FILA]='\0';
@@ -572,7 +575,9 @@ int aplazos(usuario_t usuario, int cantidadAsignaturas)
 usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 {
 	int cantidadAsignaturas = cantidad(usuario);
-	fprintf(stderr, "%s %s, %i, %s, %i, %.2f, %i\n", usuario.nombre, usuario.apellido, usuario.padron, imprimir_carrera(usuario.num_carrera, carreras), cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas));
+	fprintf(stderr, "%s %s, %i, ",  usuario.nombre, usuario.apellido, usuario.padron);
+	imprimir_carrera(usuario.num_carrera, carreras);
+	fprintf(stderr, ", %i, %.2f, %i\n",cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas));
 	return reinit(usuario);
 }
 
@@ -623,7 +628,7 @@ void imprimir_carrera(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 	}
 	else
 	{
-		printf("%s", carreras[fila]); /*Imprime la carrera correspondiente a lo ingresado*/
+		fprintf(stderr, "%s ", carreras[fila]); /*Imprime la carrera correspondiente a lo ingresado*/
 	}
 }
 

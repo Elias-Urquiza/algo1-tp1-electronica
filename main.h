@@ -6,7 +6,7 @@
 #include <string.h>
 
 /*define lenguaje*/
-#define FRANCAIS
+#define ESPANOL
 
 #ifdef ESPANOL
 #include "espanol.h"
