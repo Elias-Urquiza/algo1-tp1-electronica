@@ -57,17 +57,10 @@
 #define TEXT_MATERIA "Ingrese la asignatura: "
 #define TEXT_ELEC_BORRAR "Ingrese el numero de asignaturas que desea borrar: "
 
-#define OUT 0
-#define IN 1
-
-#define MAX_CALIF 10
-#define MIN_CANLIF 0
 #define AGREGAR '+'
 #define ELIMINAR '-'
 #define SALIR '!'
-#define CANTIDAD_INTENTOS 3
-#define CERO 48
-#define UNO 1
+
 
 /* MSJ registro */
 #define MSJ_REGISTRO "Menu Registro. Elija una opción para modificar los datos ingresados."
