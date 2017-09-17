@@ -66,7 +66,7 @@ void clear_buffer(void);
 usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 usuario_t asignaturas(usuario_t usuario);
 usuario_t metrica(usuario_t);
-usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
+usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
 
 /*funcionnes de registro*/
