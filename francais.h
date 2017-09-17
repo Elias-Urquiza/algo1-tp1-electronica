@@ -4,7 +4,7 @@
 
 /* MSJ global */
 #define MSJ_BIENVENIDA "Bienvenue !"
-#define MSJ_MAIN "\nChoississez ce que vous voulez faire :"
+#define MSJ_MAIN "Choississez ce que vous voulez faire :"
 
 /*Errores*/
 #define ERR_PREFIJO "ERREUR"
