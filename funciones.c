@@ -93,7 +93,224 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 /*-------------------------------------------------------*/
 
+void print_opciones(char materia[][LENGTH_MAX_ASIGNATURA],int nota[], int COLUMNA_IMP, int CANT)
+{
+	int COLUMNA;
+		printf("%i)",CANT);
+		for(COLUMNA=0;COLUMNA<COLUMNA_IMP-2&&materia[CANT][COLUMNA]!='\n';COLUMNA++)
+			printf("%c", materia[CANT][COLUMNA]);
 
+		printf("\t(%i)\n",nota[CANT] );
+}
+
+void clear_notas(int nota[], int FILA_NOT)
+{
+	int FILA;
+	for(FILA=0;FILA<FILA_NOT;FILA++)
+			nota[FILA]='\0';
+}
+void clear_materias(char materia[][LENGTH_MAX_ASIGNATURA], int FILA_MAT, int COLUM_MAT)
+{
+	int FILA, COLUMNA;
+	for(FILA=0;FILA<FILA_MAT;FILA++)
+		for(COLUMNA=0;COLUMNA<COLUM_MAT;COLUMNA++)
+			materia[FILA][COLUMNA]='\0';
+}
+void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BORR)
+{
+	int COLUMNA;
+	for(COLUMNA=0;COLUMNA<COLUMNA_BORR-1;COLUMNA++)
+		m[FILA_BORR][COLUMNA]='\0';
+}
+
+	/*Programa principal*/
+
+usuario_t asignaturas(usuario_t usuario)
+{
+	/*Defino un rango de las matrices junto a un par de valores auxiliares*/
+
+	char  ELEC;
+	int ENTRADA=IN, CANT_MAT=0, NUMB, ELEC_BORR,COLUMNA, NUMERO, INTENTOS, SALIDA, PROBLEMA;
+
+	/*Limpio las matrices de cualquier valor al azar definido por el programa*/
+
+	clear_materias(usuario.asignaturas, NUMERO_MAX_ASIGNATURAS, LENGTH_MAX_ASIGNATURA);
+	clear_notas(usuario.notas, MAX_CALIF);
+
+	/*Ingreso del programa*/
+
+    while(ENTRADA==IN)
+	{
+	    SALIDA=0;
+		INTENTOS=1;
+		NUMB=0;
+	/*Menu inicial*/
+
+		if(CANT_MAT>0)
+		{
+			while(NUMB<CANT_MAT)
+			{
+				print_opciones( usuario.asignaturas, usuario.notas, LENGTH_MAX_ASIGNATURA, NUMB);
+				NUMB++;
+
+			}
+			printf("%s\n", ASIGNATURA_OPCION_BORRAR);
+		}
+		printf("%s\n",ASIGNATURA_OPCION_INGRESO);
+		printf("%s\n", ASIGNATURA_OPCION_SALIDA);
+		printf("%s", ASIGNATURA_OPCION_PREGUNTA);
+
+		scanf("%c",&ELEC);
+
+		while(getchar()!='\n')
+			;
+
+	/*Eleccion de ingreso de asignatura*/
+
+		if(ELEC==AGREGAR)
+		{
+			if(CANT_MAT==NUMERO_MAX_ASIGNATURAS)
+			{
+				fprintf(stderr,"%s: %s", ERR_PREFIJO, ERR_MAX_NOTA);
+			}
+			else
+            {
+				printf("\n%s", TEXT_MATERIA);
+				fgets(usuario.asignaturas[CANT_MAT],LENGTH_MAX_ASIGNATURA, stdin);
+				printf("%s", TEXT_NOTA);
+				if(scanf("%i", &usuario.notas[CANT_MAT])!=1||usuario.notas[CANT_MAT]>MAX_CALIF||usuario.notas[CANT_MAT]<MIN_CANLIF)
+				{
+			    	PROBLEMA=1;
+					while(PROBLEMA==1&&SALIDA!=1)
+					{
+						if(INTENTOS==CANTIDAD_INTENTOS)
+						{
+							fprintf(stderr,"%s: %s", ERR_PREFIJO, ERR_INGRESO_MATERIA);
+							clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, CANT_MAT);
+							usuario.notas[CANT_MAT]=0;
+							CANT_MAT--;
+							SALIDA=1;
+						}
+						else
+						{
+							while(getchar()!='\n')
+								;
+							fprintf(stderr, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
+							if(scanf("%i", &usuario.notas[CANT_MAT])==1&&usuario.notas[CANT_MAT]<=MAX_CALIF&&usuario.notas[CANT_MAT]>=MIN_CANLIF)
+								PROBLEMA=0;
+						}
+					INTENTOS++;
+					}
+				}
+				while(getchar()!='\n')
+					;
+				CANT_MAT++;
+				printf("\n");
+            }
+		}
+
+	/*Salida del programa*/
+
+		else if(ELEC==SALIR)
+		{
+			ENTRADA=OUT;
+		}
+
+	/*Eliminación de asignatura*/
+
+		else if(ELEC==ELIMINAR)
+		{
+			if(CANT_MAT==0)
+			{
+				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+			}
+			else
+            {
+				printf("\n%s",TEXT_ELEC_BORRAR);
+				if(scanf("%i", &ELEC_BORR)!=UNO||ELEC_BORR>CANT_MAT-UNO||ELEC_BORR<0)
+				{
+					while(getchar()!='\n')
+						;
+					fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+				}
+				else
+                {
+					while(getchar()!='\n')
+						;
+					while(ELEC_BORR<NUMERO_MAX_ASIGNATURAS-UNO)
+					{
+						for(COLUMNA=0;COLUMNA<LENGTH_MAX_ASIGNATURA;COLUMNA++)
+						{
+							usuario.asignaturas[ELEC_BORR][COLUMNA]=usuario.asignaturas[ELEC_BORR+UNO][COLUMNA];
+						}
+						COLUMNA=0;
+						usuario.notas[ELEC_BORR]=usuario.notas[ELEC_BORR+UNO];
+						ELEC_BORR++;
+					}
+					CANT_MAT--;
+                }
+            }
+		}
+
+	/*Sobre escritura de asignaturas*/
+
+		else
+		{
+			NUMERO=ELEC-CERO;
+			if(NUMERO>=CANT_MAT||CANT_MAT==0)
+			{
+				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+			}
+			else
+            {
+				clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, NUMERO);
+				printf("%s", TEXT_MATERIA);
+				fgets(usuario.asignaturas[NUMERO], LENGTH_MAX_ASIGNATURA, stdin);
+
+				printf("%s", TEXT_NOTA);
+				if(scanf("%i",&usuario.notas[NUMERO])!=UNO||usuario.notas[NUMERO]>MAX_CALIF||usuario.notas[NUMERO]<MIN_CANLIF)
+				{
+				    PROBLEMA=1;
+					while(PROBLEMA==1&&SALIDA!=1)
+					{
+
+						if(INTENTOS==CANTIDAD_INTENTOS)
+						{
+						    fprintf(stderr,"%s: %s", ERR_PREFIJO, ERR_REINGRESO_CONT_NOTA);
+                		    clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, NUMERO);
+							while(NUMERO<NUMERO_MAX_ASIGNATURAS-UNO)
+							{
+								for(COLUMNA=0;COLUMNA<LENGTH_MAX_ASIGNATURA;COLUMNA++)
+								{
+									usuario.asignaturas[NUMERO][COLUMNA]=usuario.asignaturas[NUMERO+UNO][COLUMNA];
+								}
+								COLUMNA=0;
+								usuario.notas[NUMERO]=usuario.notas[NUMERO+UNO];
+								NUMERO++;
+							}
+							CANT_MAT--;
+							SALIDA=1;
+						}
+						else
+						{
+							while(getchar()!='\n')
+								;
+							fprintf(stderr, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
+							if(scanf("%i", &usuario.notas[NUMERO])==1&&usuario.notas[NUMERO]<=MAX_CALIF&&usuario.notas[NUMERO]>=MIN_CANLIF)
+								PROBLEMA=0;
+
+						}
+					INTENTOS++;
+					}
+				}
+				while(getchar()!='\n')
+					;
+				printf("\n");
+            }
+		}
+	}
+	return usuario;
+}
 
 /*-------------------------------------------------------*/
 
