@@ -8,7 +8,7 @@
 
 /*Errors*/
 #define ERR_PREFIJO "ERROR"
-#define ERR_OPCIONES "Invalid option. Please, try again."
+#define ERR_OPCIONES "Invalid option. Please, try again: "
 
 #define ERR_INGRESO_MATERIA "La asignatura fue mal ingresada."
 #define ERR_INGRESO_NOTA "La nota fue mal ingresada."

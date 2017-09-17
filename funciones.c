@@ -7,7 +7,8 @@
 
 usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 {
-	char input_i = 0;
+	char input_i = '\0';
+	int i = 0;
 
 	puts(MSJ_REGISTRO);
 
@@ -15,70 +16,84 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 	{
 		printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ",REGISTRO_OPCION_NOMBRE_CHAR, REGISTRO_OPCION_NOMBRE, REGISTRO_OPCION_PADRON_CHAR, REGISTRO_OPCION_PADRON, REGISTRO_OPCION_CARRERA_CHAR, REGISTRO_OPCION_CARRERA, REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
 
-		if(scanf("%c", &input_i) != 1)
-		{
-			fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-			/*ERROR REVISAR QUE HACER AQUI AURELIEN!*/
-		}
-		clear_buffer();
 
+		input_i = '\0';
+		i = 0;
+		while((input_i != REGISTRO_OPCION_NOMBRE_CHAR) && (input_i != REGISTRO_OPCION_PADRON_CHAR) && (input_i != REGISTRO_OPCION_CARRERA_CHAR) && (input_i != REGISTRO_OPCION_VOLVER_CHAR))
+		{
+			scanf("%c", &input_i);
+			if((input_i != REGISTRO_OPCION_NOMBRE_CHAR) && (input_i != REGISTRO_OPCION_PADRON_CHAR) && (input_i != REGISTRO_OPCION_CARRERA_CHAR) && (input_i != REGISTRO_OPCION_VOLVER_CHAR))
+			{
+				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+				i++;
+				if(i >= 3)
+					input_i = MAIN_OPCION_SALIR_CHAR;
+			}
+			clear_buffer();
+		}
+
+/*Ingresa apellido y nombre*/
 		if(input_i == REGISTRO_OPCION_NOMBRE_CHAR)
 		{
 			printf("%s: ", REGISTRO_ING_APELLIDO);
 			if(scanf("%s", usuario.apellido) != 1)
 			{
 				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
-				/*ERROR REVISAR QUE HACER AQUI AURELIEN!*/
 			}
-			while(getchar() != '\n') ;
+			clear_buffer();
 
 			printf("%s: ", REGISTRO_ING_NOMBRE);
 
-			if(scanf("%s", usuario.nombre) != 1) /*Ingresa apellido y nombre*/
+			if(scanf("%s", usuario.nombre) != 1)
 			{
 				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
-				/*ERROR REVISAR QUE HACER AQUI AURELIEN!*/
 			}
-			while(getchar() != '\n') ;
+			clear_buffer();
 
 			printf("%s: %s, %s\n", REGISTRO_ING_AVISO, usuario.apellido, usuario.nombre);
 		}
-		else if(input_i == REGISTRO_OPCION_PADRON_CHAR) /*Ingresa padron*/
+
+/*Ingresa padron*/
+		else if(input_i == REGISTRO_OPCION_PADRON_CHAR)
 		{
 			printf("%s: ", REGISTRO_ING_PADRON);
-			if(scanf("%i", &usuario.padron) != 1)
+			i = 0;
+			while ((scanf("%i", &usuario.padron) != 1) && i < MAX_TRY)
 			{
-				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_REG_PADRON);
-				/*ERROR REVISAR QUE HACER AQUI AURELIEN!*/
+				fprintf(stderr, "%s: %s\n%s", ERR_PREFIJO, ERR_REG_PADRON, ERR_OPCIONES);
+				i++;
+				clear_buffer();
 			}
-			while(getchar() != '\n') ;
+			clear_buffer();
 			printf("%s: %i\n", REGISTRO_ING_AVISO, usuario.padron);
 		}
-		else if(input_i == REGISTRO_OPCION_CARRERA_CHAR) /*Pide numero de carrera para identificar que nombre de la matriz carreras usar*/
+
+/*Pide numero de carrera para identificar que nombre de la matriz carreras usar*/
+		else if(input_i == REGISTRO_OPCION_CARRERA_CHAR)
 		{
 			printf("%s: ", REGISTRO_ING_CARRERA);
 			if(scanf("%i", &usuario.num_carrera) != 1)
 			{
 				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_REG_CARRERA);
-				/*ERROR REVISAR QUE HACER AQUI AURELIEN!*/
 			}
 			while(getchar() != '\n') ;
 
 			printf("%s: ", REGISTRO_ING_AVISO);
 			imprimir_carrera(usuario.num_carrera, carreras);
 		}
-		else if(input_i == REGISTRO_OPCION_VOLVER_CHAR) /*Sale del loop y permite terminar la funcion registro*/
-		{
+
+/*Sale del loop y permite terminar la funcion registro*/
+		else if(input_i == REGISTRO_OPCION_VOLVER_CHAR)
 			break;
-		}
-		else
-		{
-			fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-			/*ERROR REVISAR QUE HACER AQUI AURELIEN!*/
-		}
 	}
 
-	return usuario; /* Solo se sale exitosamente si se activa el break; */
+	else
+	{
+		fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+	}
+}
+
+return usuario;         /* Solo se sale exitosamente si se activa el break; */
 }
 
 /*-------------------------------------------------------*/

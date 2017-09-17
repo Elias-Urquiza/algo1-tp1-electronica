@@ -8,7 +8,7 @@
 
 /*Errores*/
 #define ERR_PREFIJO "ERROR"
-#define ERR_OPCIONES "Opción ingresada no válida, intenta de nuevo."
+#define ERR_OPCIONES "Opción ingresada no válida, intenta de nuevo: "
 
 #define ERR_INGRESO_MATERIA "La asignatura fue mal ingresada."
 #define ERR_INGRESO_NOTA "La nota fue mal ingresada."

@@ -8,7 +8,7 @@
 
 /*Errores*/
 #define ERR_PREFIJO "ERREUR"
-#define ERR_OPCIONES "Opcion invalide. Merci de réessayer"
+#define ERR_OPCIONES "Option invalide. Merci de réessayer : "
 
 #define ERR_INGRESO_MATERIA "La matière ne peut pas être lue"
 #define ERR_INGRESO_NOTA "La note n'est pas valide"
@@ -63,7 +63,7 @@
 
 
 /* MSJ registro */
-#define MSJ_REGISTRO "Menu register, Choississez une opcion pour modifier les données rentrées."
+#define MSJ_REGISTRO "Menu register, Choississez une option pour modifier les données rentrées."
 #define REGISTRO_OPCION_NOMBRE "Nom et prénom"
 #define REGISTRO_OPCION_NOMBRE_CHAR 'N'
 #define REGISTRO_OPCION_PADRON "Padron"
