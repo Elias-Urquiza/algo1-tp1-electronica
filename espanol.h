@@ -4,7 +4,7 @@
 
 /* MSJ global */
 #define MSJ_BIENVENIDA "¡Bienvenido!"
-#define MSJ_MAIN "\nElija que desea hacer:"
+#define MSJ_MAIN "Elija que desea hacer:"
 
 /*Errores*/
 #define ERR_PREFIJO "ERROR"
@@ -55,7 +55,7 @@
 #define ASIGNATURA_OPCION_PREGUNTA "? "
 #define TEXT_NOTA "Ingrese la nota: "
 #define TEXT_MATERIA "Ingrese la asignatura: "
-#define TEXT_ELEC_BORRAR "Ingrese el numero de asignaturas que desea borrar: "
+#define TEXT_ELEC_BORRAR "Ingrese el numero de asignatura que desea borrar: "
 
 #define AGREGAR '+'
 #define ELIMINAR '-'
