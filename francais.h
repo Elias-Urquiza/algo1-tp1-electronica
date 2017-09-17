@@ -4,7 +4,7 @@
 
 /* MSJ global */
 #define MSJ_BIENVENIDA "Bienvenue !"
-#define MSJ_MAIN "\nChoississez ce aue vous voulez faire :"
+#define MSJ_MAIN "\nChoississez ce que vous voulez faire :"
 
 /*Errores*/
 #define ERR_PREFIJO "ERREUR"
@@ -26,11 +26,11 @@
 #define MAIN_OPCION_1_CHAR 'R'
 #define MAIN_OPCION_2 "Matières"
 #define MAIN_OPCION_2_CHAR 'M'
-#define MAIN_OPCION_3 "Calcul de donnés personnelles"
+#define MAIN_OPCION_3 "Calcul de données personnelles"
 #define MAIN_OPCION_3_CHAR 'C'
 #define MAIN_OPCION_FINALIZAR "Finaliser"
 #define MAIN_OPCION_FINALIZAR_CHAR '!'
-#define MAIN_OPCION_SALIR "Sotir"
+#define MAIN_OPCION_SALIR "Sortir"
 #define MAIN_OPCION_SALIR_CHAR '0'
 
 /*Carreras*/
@@ -96,8 +96,8 @@
 #define METRICA_OPCION_VOLVER_CHAR '0'
 
 #define MSJ_PROMEDIO "La moyenne est de : "
-#define MSJ_MAXIMO "La matière ou vous avez la moins bonne note est : "
-#define MSJ_MINIMO "La matière ou vous avez la meilleure note est : "
+#define MSJ_MAXIMO "La matière ou vous avez la meilleure bonne note est : "
+#define MSJ_MINIMO "La matière ou vous avez la moins bonne note est : "
 #define MSJ_CANTIDAD "Le nombre de matière est : "
 #define MSJ_APLAZOS "La nombre de matière(s) échouée(s) : "
 

@@ -6,7 +6,7 @@
 #include <string.h>
 
 /*define lenguaje*/
-#define ESPANOL
+#define FRANCAIS
 
 #ifdef ESPANOL
 #include "espanol.h"
@@ -30,7 +30,7 @@
 /* Otros parametros */
 #define MAX_TRY 3
 #define LENGTH_MAX_CARRERAS 12
-#define LENGTH_MAX_NOMBRE_CARRERAS 30
+#define LENGTH_MAX_NOMBRE_CARRERAS 35
 
 #define OUT 0
 #define IN 1
