@@ -4,7 +4,7 @@
 
 /* MSJ global */
 #define MSJ_BIENVENIDA "¡Bienvenido!"
-#define MSJ_MAIN "Elija que desea hacer:"
+#define MSJ_MAIN "\nElija que desea hacer:"
 
 /*Errores*/
 #define ERR_PREFIJO "ERROR"
@@ -49,9 +49,9 @@
 
 
 /* MSJ asignatura */
-#define ASIGNATURA_OPCION_INGRESO "+)Ingreso de asignatura."
-#define ASIGNATURA_OPCION_SALIDA "!)Salir."
-#define ASIGNATURA_OPCION_BORRAR "-)Eliminar una asignatura."
+#define ASIGNATURA_OPCION_INGRESO "+) Ingreso de asignatura."
+#define ASIGNATURA_OPCION_SALIDA "!) Salir."
+#define ASIGNATURA_OPCION_BORRAR "-) Eliminar una asignatura."
 #define ASIGNATURA_OPCION_PREGUNTA "? "
 #define TEXT_NOTA "Ingrese la nota: "
 #define TEXT_MATERIA "Ingrese la asignatura: "
@@ -81,7 +81,7 @@
 #define REGISTRO_ING_AVISO "Queda registrado lo siguiente"
 
 /* MSJ de metricas */
-#define MSJ_METRICA "Metrica:"
+#define MSJ_METRICA "\nMetrica:"
 #define METRICA_OPCION_PROMEDIO "Promedio"
 #define METRICA_OPCION_PROMEDIO_CHAR 'P'
 #define METRICA_OPCION_MAXIMO "Maximo"

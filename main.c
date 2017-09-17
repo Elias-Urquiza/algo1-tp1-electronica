@@ -25,7 +25,7 @@ int main(void)
 
 			letter = '\0';
 			i = 0;
-			while((i < MAX_TRY) && (letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
+			while((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
 			{
 				scanf("%c", &letter);
 				if((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
@@ -33,7 +33,7 @@ int main(void)
 					fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
 					i++;
 					if(i >= 3)
-						letter = '0';
+						letter = MAIN_OPCION_SALIR_CHAR;
 				}
 				clear_buffer();
 			}
@@ -51,8 +51,7 @@ int main(void)
 
 		case MENU_ASIGNATURAS:
 		{
-			/*
-			   alumno = asignaturas(alumno); */ /*function de mauri*/
+			alumno = asignaturas(alumno); /*function de mauri*/
 			estado = MAIN_MENU;
 			break;
 		}
