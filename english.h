@@ -4,11 +4,18 @@
 
 /* Global Messages */
 #define MSJ_BIENVENIDA "Welcome!"
-#define MSJ_MAIN "Please, pick an option:"
+#define MSJ_MAIN "\nPlease, pick an option:"
 
 /*Errors*/
 #define ERR_PREFIJO "ERROR"
 #define ERR_OPCIONES "Invalid option. Please, try again."
+
+#define ERR_INGRESO_MATERIA "La asignatura fue mal ingresada."
+#define ERR_INGRESO_NOTA "La nota fue mal ingresada."
+#define ERR_INGRESO_CONT_NOTA "La nota fue mal ingresada, por favor vuelva a intentar: "
+#define ERR_REINGRESO_CONT_NOTA "La rescritura de la materia fue de manera incorrecta"
+#define ERR_ELEC "La eleccion realizada no esta permitida."
+#define ERR_MAX_NOTA "Se a llegado a la maxima cantidad de asignaturas ingresada."
 
 #define ERR_REG_NOMBRE "The name you typed couldn't be read."
 #define ERR_REG_PADRON "The college ID you typed couldn't be read."
@@ -40,6 +47,19 @@
 #define ING_10 "Informatics' Engineering"
 #define ING_11 "Food Engineering"
 
+/* MSJ asignatura */
+#define ASIGNATURA_OPCION_INGRESO "+) Ingreso de asignatura."
+#define ASIGNATURA_OPCION_SALIDA "!) Salir."
+#define ASIGNATURA_OPCION_BORRAR "-) Eliminar una asignatura."
+#define ASIGNATURA_OPCION_PREGUNTA "? "
+#define TEXT_NOTA "Ingrese la nota: "
+#define TEXT_MATERIA "Ingrese la asignatura: "
+#define TEXT_ELEC_BORRAR "Ingrese el numero de asignaturas que desea borrar: "
+
+#define AGREGAR '+'
+#define ELIMINAR '-'
+#define SALIR '!'
+
 /* Registry */
 #define MSJ_REGISTRO "Registry Menu. Pick an option to modify the logged data."
 #define REGISTRO_OPCION_NOMBRE "Full Name"
@@ -59,7 +79,7 @@
 #define REGISTRO_ING_AVISO "Registered:"
 
 /* Metrics */
-#define MSJ_METRICA "Pick which metric to measure:"
+#define MSJ_METRICA "\nPick which metric to measure:"
 #define METRICA_OPCION_PROMEDIO "Average"
 #define METRICA_OPCION_PROMEDIO_CHAR 'A'
 #define METRICA_OPCION_MAXIMO "Maximum"
