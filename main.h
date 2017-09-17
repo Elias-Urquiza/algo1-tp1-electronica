@@ -32,6 +32,15 @@
 #define LENGTH_MAX_CARRERAS 12
 #define LENGTH_MAX_NOMBRE_CARRERAS 30
 
+#define OUT 0
+#define IN 1
+
+#define MAX_CALIF 10
+#define MIN_CANLIF 0
+#define CANTIDAD_INTENTOS 3
+#define ASCII_CERO 48
+#define UNO 1
+
 /*Tipos de clasificacion de variables personales*/
 
 typedef enum
@@ -42,12 +51,12 @@ typedef enum
 
 typedef struct
 {
-  char nombre[LENGTH_MAX_NOMBRE];
+	char nombre[LENGTH_MAX_NOMBRE];
 	char apellido[LENGTH_MAX_NOMBRE];
 	int padron;
-  int num_carrera;
-  char asignaturas[NUMERO_MAX_ASIGNATURAS][LENGTH_MAX_ASIGNATURA];
-  int notas[NUMERO_MAX_ASIGNATURAS];
+	int num_carrera;
+	char asignaturas[NUMERO_MAX_ASIGNATURAS][LENGTH_MAX_ASIGNATURA];
+	int notas[NUMERO_MAX_ASIGNATURAS];
 }usuario_t;
 
 
@@ -55,7 +64,7 @@ typedef struct
 usuario_t reinit(usuario_t);
 void clear_buffer(void);
 usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
-usuario_t asignaturas(usuario_t);
+usuario_t asignaturas(usuario_t usuario);
 usuario_t metrica(usuario_t);
 usuario_t finalizar(usuario_t);
 
@@ -64,7 +73,10 @@ usuario_t finalizar(usuario_t);
 void imprimir_carrera(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
 /*funcionnes de asignaturas*/
-
+void print_opciones(char materia[][LENGTH_MAX_ASIGNATURA],int nota[], int COLUMNA_IMP, int CANT);
+void clear_notas(int nota[], int FILA_NOT);
+void clear_materias(char materia[][LENGTH_MAX_ASIGNATURA], int FILA_MAT, int COLUM_MAT);
+void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BORR);
 
 /*funcionnes y tipos de metrica*/
 typedef enum
