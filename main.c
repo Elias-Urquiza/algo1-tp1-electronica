@@ -18,62 +18,62 @@ int main(void)
 	{
 		switch(estado)
 		{
-		case MAIN_MENU:
-		{
-			puts(MSJ_MAIN);
-			printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", MAIN_OPCION_1_CHAR, MAIN_OPCION_1, MAIN_OPCION_2_CHAR, MAIN_OPCION_2, MAIN_OPCION_3_CHAR, MAIN_OPCION_3, MAIN_OPCION_FINALIZAR_CHAR, MAIN_OPCION_FINALIZAR, MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
-
-			letter = '\0';
-			i = 0;
-			while((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
+			case MAIN_MENU:
 			{
-				scanf("%c", &letter);
-				if((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
+				puts(MSJ_MAIN);
+				printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", MAIN_OPCION_1_CHAR, MAIN_OPCION_1, MAIN_OPCION_2_CHAR, MAIN_OPCION_2, MAIN_OPCION_3_CHAR, MAIN_OPCION_3, MAIN_OPCION_FINALIZAR_CHAR, MAIN_OPCION_FINALIZAR, MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
+
+				letter = '\0';
+				i = 0;
+				while((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
 				{
-					fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-					i++;
-					if(i >= 3)
-						letter = MAIN_OPCION_SALIR_CHAR;
+					scanf("%c", &letter);
+					if((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
+					{
+						fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+						i++;
+						if(i >= 3)
+							letter = MAIN_OPCION_SALIR_CHAR;
+					}
+					clear_buffer();
 				}
-				clear_buffer();
+
+				estado = letter;
+				break;
 			}
 
-			estado = letter;
-			break;
-		}
+			case MENU_REGISTRO:
+			{
+				alumno = registro(alumno, carreras); /*function de elias*/
+				estado = MAIN_MENU;
+				break;
+			}
 
-		case MENU_REGISTRO:
-		{
-			alumno = registro(alumno, carreras); /*function de elias*/
-			estado = MAIN_MENU;
-			break;
-		}
+			case MENU_ASIGNATURAS:
+			{
+				alumno = asignaturas(alumno); /*function de mauri*/
+				estado = MAIN_MENU;
+				break;
+			}
 
-		case MENU_ASIGNATURAS:
-		{
-			alumno = asignaturas(alumno); /*function de mauri*/
-			estado = MAIN_MENU;
-			break;
-		}
+			case MENU_METRICA:
+			{
+				alumno = metrica(alumno); /*function de aurelien*/
+				estado = MAIN_MENU;
+				break;
+			}
 
-		case MENU_METRICA:
-		{
-			alumno = metrica(alumno); /*function de aurelien*/
-			estado = MAIN_MENU;
-			break;
-		}
+			case MENU_FINALIZAR:
+			{
+				alumno = finalizar(alumno, carreras);
+				estado = MAIN_MENU;
+				break;
+			}
 
-		case MENU_FINALIZAR:
-		{
-			alumno = finalizar(alumno);
-			estado = MAIN_MENU;
-			break;
-		}
-
-		case MAIN_SALIR:
-		{
-			return EXIT_SUCCESS;
-		}
+			case MAIN_SALIR:
+			{
+				return EXIT_SUCCESS;
+			}
 
 		}
 	}
