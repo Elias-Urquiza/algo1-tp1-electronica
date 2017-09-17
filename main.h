@@ -32,6 +32,15 @@
 #define LENGTH_MAX_CARRERAS 12
 #define LENGTH_MAX_NOMBRE_CARRERAS 30
 
+#define OUT 0
+#define IN 1
+
+#define MAX_CALIF 10
+#define MIN_CANLIF 0
+#define CANTIDAD_INTENTOS 3
+#define ASCII_CERO 48
+#define UNO 1
+
 /*Tipos de clasificacion de variables personales*/
 
 typedef enum
@@ -42,12 +51,12 @@ typedef enum
 
 typedef struct
 {
-  char nombre[LENGTH_MAX_NOMBRE];
+	char nombre[LENGTH_MAX_NOMBRE];
 	char apellido[LENGTH_MAX_NOMBRE];
 	int padron;
-  int num_carrera;
-  char asignaturas[NUMERO_MAX_ASIGNATURAS][LENGTH_MAX_ASIGNATURA];
-  int notas[NUMERO_MAX_ASIGNATURAS];
+	int num_carrera;
+	char asignaturas[NUMERO_MAX_ASIGNATURAS][LENGTH_MAX_ASIGNATURA];
+	int notas[NUMERO_MAX_ASIGNATURAS];
 }usuario_t;
 
 
