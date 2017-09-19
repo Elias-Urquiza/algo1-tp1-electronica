@@ -11,7 +11,8 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 	int i = 0;
 
 	puts(MSJ_REGISTRO);
-
+	
+	/*Inicia un loop en el que se encontrará el sub-menú: */
 	while(1)
 	{
 		printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ",REGISTRO_OPCION_NOMBRE_CHAR, REGISTRO_OPCION_NOMBRE, REGISTRO_OPCION_PADRON_CHAR, REGISTRO_OPCION_PADRON, REGISTRO_OPCION_CARRERA_CHAR, REGISTRO_OPCION_CARRERA, REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
@@ -30,6 +31,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 					input_i = MAIN_OPCION_SALIR_CHAR;
 			}
 			clear_buffer();
+			/*verifica que el input sea válido y le da al usuario 3 oportunidades antes de devolverlo al menu principal*/
 		}
 
 /*Ingresa apellido y nombre*/
@@ -594,7 +596,7 @@ usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERA
 /*-------------------------------------------------------*/
 
 
-usuario_t reinit(usuario_t usuario)
+usuario_t reinit(usuario_t usuario) /*reinicializa los datos del usuario*/
 {
 	int i, j;
 
@@ -621,7 +623,7 @@ usuario_t reinit(usuario_t usuario)
 	return usuario;
 }
 
-void imprimir_carrera_aviso(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
+void imprimir_carrera_aviso(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]) /*imprime por stdout el nombre de carrera segun num*/
 {
 	if(fila < 0 || fila > 12)
 	{
@@ -633,7 +635,7 @@ void imprimir_carrera_aviso(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 	}
 }
 
-void imprimir_carrera_fin(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
+void imprimir_carrera_fin(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]) /*imprime por stderr el nombre de carrera segun num*/
 {
 	if(fila < 0 || fila > 12)
 	{
@@ -645,7 +647,7 @@ void imprimir_carrera_fin(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 	}
 }
 
-void clear_buffer(void)
+void clear_buffer(void) /*limpia el buffer. No siempre utilizado*/
 {
 	while(getchar() != '\n')
 		NULL;
