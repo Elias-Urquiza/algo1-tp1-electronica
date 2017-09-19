@@ -25,7 +25,7 @@
 /*Parametros de usuario_t*/
 #define LENGTH_MAX_NOMBRE 50
 #define LENGTH_MAX_ASIGNATURA 30
-#define NUMERO_MAX_ASIGNATURAS 10
+#define NUMERO_MAX_ASIGNATURAS 50
 
 /* Otros parametros */
 #define MAX_TRY 3
@@ -70,7 +70,8 @@ usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERA
 
 
 /*funcionnes de registro*/
-void imprimir_carrera(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
+void imprimir_carrera_aviso(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
+void imprimir_carrera_fin(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
 /*funcionnes de asignaturas*/
 void print_opciones(char materia[][LENGTH_MAX_ASIGNATURA],int nota[], int COLUMNA_IMP, int CANT);

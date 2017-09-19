@@ -24,7 +24,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			scanf("%c", &input_i);
 			if((input_i != REGISTRO_OPCION_NOMBRE_CHAR) && (input_i != REGISTRO_OPCION_PADRON_CHAR) && (input_i != REGISTRO_OPCION_CARRERA_CHAR) && (input_i != REGISTRO_OPCION_VOLVER_CHAR))
 			{
-				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
 				i++;
 				if(i >= 3)
 					input_i = MAIN_OPCION_SALIR_CHAR;
@@ -38,7 +38,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			printf("%s: ", REGISTRO_ING_APELLIDO);
 			if(scanf("%s", usuario.apellido) != 1)
 			{
-				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
 			}
 			clear_buffer();
 
@@ -46,7 +46,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 			if(scanf("%s", usuario.nombre) != 1)
 			{
-				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
 			}
 			clear_buffer();
 
@@ -60,7 +60,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			i = 0;
 			while ((scanf("%i", &usuario.padron) != 1) && i < MAX_TRY)
 			{
-				fprintf(stderr, "%s: %s\n%s", ERR_PREFIJO, ERR_REG_PADRON, ERR_OPCIONES);
+				fprintf(stdout, "%s: %s\n%s", ERR_PREFIJO, ERR_REG_PADRON, ERR_OPCIONES);
 				i++;
 				clear_buffer();
 			}
@@ -74,11 +74,12 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			printf("%s: ", REGISTRO_ING_CARRERA);
 			if(scanf("%i", &usuario.num_carrera) != 1)
 			{
-				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_REG_CARRERA);
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_CARRERA);
 			}
-			while(getchar() != '\n') ;
+			while(getchar() != '\n');
 
-			imprimir_carrera(usuario.num_carrera, carreras);
+			printf("%s: ", REGISTRO_ING_AVISO);
+			imprimir_carrera_aviso(usuario.num_carrera, carreras);
 
 			printf("\n");
 		}
@@ -91,7 +92,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 		else
 		{
-			fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+			fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
 		}
 	}
 
@@ -162,7 +163,7 @@ usuario_t asignaturas(usuario_t usuario)
 		{
 			if(CANT_MAT == NUMERO_MAX_ASIGNATURAS)
 			{
-				fprintf(stderr,"%s: %s", ERR_PREFIJO, ERR_MAX_NOTA);
+				fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_MAX_NOTA);
 			}
 
 			else
@@ -178,7 +179,7 @@ usuario_t asignaturas(usuario_t usuario)
 					{
 						if(INTENTOS == CANTIDAD_INTENTOS)
 						{
-							fprintf(stderr,"%s: %s", ERR_PREFIJO, ERR_INGRESO_MATERIA);
+							fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_INGRESO_MATERIA);
 							clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, CANT_MAT);
 							usuario.notas[CANT_MAT] = 0;
 							CANT_MAT--;
@@ -189,7 +190,7 @@ usuario_t asignaturas(usuario_t usuario)
 						{
 							while(getchar()!='\n') ;
 
-							fprintf(stderr, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
+							fprintf(stdout, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
 							if(scanf("%i", &usuario.notas[CANT_MAT]) == 1 && usuario.notas[CANT_MAT] <= MAX_CALIF && usuario.notas[CANT_MAT] >= MIN_CANLIF)
 							{
 								PROBLEMA = 0;
@@ -219,7 +220,7 @@ usuario_t asignaturas(usuario_t usuario)
 		{
 			if(CANT_MAT == 0)
 			{
-				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
 			}
 			else
 			{
@@ -229,7 +230,7 @@ usuario_t asignaturas(usuario_t usuario)
 				{
 					while(getchar()!='\n') ;
 
-					fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+					fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
 				}
 				else
 				{
@@ -256,9 +257,9 @@ usuario_t asignaturas(usuario_t usuario)
 
 		{
 			NUMERO = atoi(ELEC);  /*Modificacion para que se guarde el numero ingresado en vez de su equivalente en ASCII*/
-			if(NUMERO >= CANT_MAT || CANT_MAT == 0 || NUMERO == 0 && ELEC[0] != 0)
+			if(NUMERO >= CANT_MAT || CANT_MAT == 0 || (NUMERO == 0 && ELEC[0] != 0))
 			{
-				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
 			}
 			else
 			{
@@ -274,7 +275,7 @@ usuario_t asignaturas(usuario_t usuario)
 					{
 						if(INTENTOS == CANTIDAD_INTENTOS)
 						{
-							fprintf(stderr,"%s: %s", ERR_PREFIJO, ERR_REINGRESO_CONT_NOTA);
+							fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_REINGRESO_CONT_NOTA);
 
 							clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, NUMERO);
 
@@ -295,7 +296,7 @@ usuario_t asignaturas(usuario_t usuario)
 						{
 							while(getchar() != '\n') ;
 
-							fprintf(stderr, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
+							fprintf(stdout, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
 
 							if(scanf("%i", &usuario.notas[NUMERO]) == 1 && usuario.notas[NUMERO] <= MAX_CALIF && usuario.notas[NUMERO] >= MIN_CANLIF)
 							{
@@ -575,9 +576,9 @@ int aplazos(usuario_t usuario, int cantidadAsignaturas)
 usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 {
 	int cantidadAsignaturas = cantidad(usuario);
-	fprintf(stderr, "%s %s, %i, ",  usuario.nombre, usuario.apellido, usuario.padron);
-	imprimir_carrera(usuario.num_carrera, carreras);
-	fprintf(stderr, ", %i, %.2f, %i\n",cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas));
+	fprintf(stderr, "%s %s, %i, ",  usuario.nombre, usuario.apellido, usuario.padron); /*imprime nombre, apellido y padrón por stderr*/
+	imprimir_carrera_fin(usuario.num_carrera, carreras); /*imprime la carrera elegida por stderr*/
+	fprintf(stderr, "%i, %.2f, %i\n",cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas)); /*imprime los datos restantes por stderr*/
 	return reinit(usuario);
 }
 
@@ -620,7 +621,7 @@ usuario_t reinit(usuario_t usuario)
 	return usuario;
 }
 
-void imprimir_carrera(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
+void imprimir_carrera_aviso(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 {
 	if(fila < 0 || fila > 12)
 	{
@@ -628,7 +629,19 @@ void imprimir_carrera(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 	}
 	else
 	{
-		fprintf(stderr, "%s ", carreras[fila]); /*Imprime la carrera correspondiente a lo ingresado*/
+		printf("%s\n", carreras[fila]); /*Imprime la carrera correspondiente a lo ingresado*/
+	}
+}
+
+void imprimir_carrera_fin(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
+{
+	if(fila < 0 || fila > 12)
+	{
+		fprintf(stderr, "%s, ", ERR_REG_CARRERA);
+	}
+	else
+	{
+		fprintf(stderr, "%s, ", carreras[fila]);
 	}
 }
 
