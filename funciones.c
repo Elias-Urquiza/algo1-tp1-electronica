@@ -119,7 +119,7 @@ usuario_t asignaturas(usuario_t usuario)
 {
 /*Defino un rango de las matrices junto a un par de valores auxiliares*/
 
-	char ELEC;
+	char ELEC[2]; /*variable modificada para aceptar numero de dos cifras*/
 	int ENTRADA = IN, CANT_MAT = 0, NUMB, ELEC_BORR,COLUMNA, NUMERO, INTENTOS, SALIDA, PROBLEMA;
 
 /*Limpio las matrices de cualquier valor al azar definido por el programa*/
@@ -153,12 +153,12 @@ usuario_t asignaturas(usuario_t usuario)
 		printf("\t%s\n", ASIGNATURA_OPCION_SALIDA);
 		printf("%s", ASIGNATURA_OPCION_PREGUNTA);
 
-		scanf("%c",&ELEC);
+		scanf("%s", ELEC); /*scanf modificado para aceptar una cadena de caracteres y no solo un char*/
 		while(getchar() != '\n') ;
 
 /*Eleccion de ingreso de asignatura*/
 
-		if(ELEC == AGREGAR)
+		if(ELEC[0] == AGREGAR)
 		{
 			if(CANT_MAT == NUMERO_MAX_ASIGNATURAS)
 			{
@@ -208,14 +208,14 @@ usuario_t asignaturas(usuario_t usuario)
 
 /*Salida del programa*/
 
-		else if(ELEC == SALIR)
+		else if(ELEC[0] == SALIR)
 		{
 			ENTRADA = OUT;
 		}
 
 /*Eliminación de asignatura*/
 
-		else if(ELEC == ELIMINAR)
+		else if(ELEC[0] == ELIMINAR)
 		{
 			if(CANT_MAT == 0)
 			{
@@ -255,8 +255,8 @@ usuario_t asignaturas(usuario_t usuario)
 		else /*para los casos de ELEC*/
 
 		{
-			NUMERO = ELEC - ASCII_CERO;
-			if(NUMERO >= CANT_MAT || CANT_MAT == 0)
+			NUMERO = atoi(ELEC);  /*Modificacion para que se guarde el numero ingresado en vez de su equivalente en ASCII*/
+			if(NUMERO >= CANT_MAT || CANT_MAT == 0 || NUMERO == 0 && ELEC[0] != 0)
 			{
 				fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
 			}
