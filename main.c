@@ -30,7 +30,7 @@ int main(void)
 					scanf("%c", &letter);
 					if((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
 					{
-						fprintf(stderr, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+						fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
 						i++;
 						if(i >= 3)
 							letter = MAIN_OPCION_SALIR_CHAR;
