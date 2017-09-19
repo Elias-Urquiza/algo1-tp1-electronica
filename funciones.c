@@ -393,10 +393,11 @@ usuario_t metrica (usuario_t usuario)
 	int cantidadAsignaturas = cantidad(usuario);
 	int index;
 
-	while(estado != VOLVER)
+	while(estado != VOLVER) /*inicializa el sub-menú y lo mantiene dentro del mismo hasta que el usuario elija salir*/
 	{
 		switch(estado)
 		{
+			/*menu principal*/
 			case MAIN_METRICA:
 			{
 
@@ -422,7 +423,8 @@ usuario_t metrica (usuario_t usuario)
 				estado = letter;
 				break;
 			}
-
+				
+/*calcula promedio usando su funcion respectiva*/
 			case PROMEDIO:
 			{
 				printf(MSJ_PROMEDIO);
@@ -431,7 +433,8 @@ usuario_t metrica (usuario_t usuario)
 				estado = MAIN_METRICA;
 				break;
 			}
-
+				
+/*calcula nota maxima y expresa en cual materia es usando la funcion maximo();*/
 			case MAXIMO:
 			{
 				printf(MSJ_MAXIMO);
@@ -446,7 +449,8 @@ usuario_t metrica (usuario_t usuario)
 				estado = MAIN_METRICA;
 				break;
 			}
-
+				
+/*calcula nota minima y expresa en cual materia es usando la funcion minimo();*/
 			case MINIMO:
 			{
 				printf(MSJ_MINIMO);
@@ -461,7 +465,8 @@ usuario_t metrica (usuario_t usuario)
 				estado = MAIN_METRICA;
 				break;
 			}
-
+				
+/*calcula la cantidad de materias cursadas con su funcion correspondiente*/
 			case CANTIDAD:
 			{
 				printf(MSJ_CANTIDAD);
@@ -470,6 +475,7 @@ usuario_t metrica (usuario_t usuario)
 				break;
 			}
 
+/*calcula la cantidad de aplazos con su funcion correspondiente*/
 			case APLAZOS:
 			{
 				printf(MSJ_APLAZOS);
