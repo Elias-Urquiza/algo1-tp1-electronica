@@ -13,7 +13,7 @@
 #define ERR_INGRESO_MATERIA "La asignatura fue mal ingresada."
 #define ERR_INGRESO_NOTA "La nota fue mal ingresada."
 #define ERR_INGRESO_CONT_NOTA "La nota fue mal ingresada, por favor vuelva a intentar: "
-#define ERR_REINGRESO_CONT_NOTA "La rescritura de la materia fue de manera incorrecta"
+#define ERR_REINGRESO_CONT_NOTA "La rescritura de la materia se realizó de manera incorrecta."
 #define ERR_ELEC "La eleccion realizada no esta permitida."
 #define ERR_MAX_NOTA "Se a llegado a la maxima cantidad de asignaturas ingresada."
 
