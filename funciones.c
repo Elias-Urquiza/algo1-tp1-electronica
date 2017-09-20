@@ -127,8 +127,7 @@ usuario_t asignaturas(usuario_t usuario)
 
 /*Limpio las matrices de cualquier valor al azar definido por el programa*/
 
-	clear_materias(usuario.asignaturas, NUMERO_MAX_ASIGNATURAS, LENGTH_MAX_ASIGNATURA);
-	clear_notas(usuario.notas, MAX_CALIF);
+	CANT_MAT=cantidad(usuario); /*Funciòn tomada de Aurelien para registrar la cantidad de materias al volver al submenu*/
 
 /*Ingreso del programa*/
 
