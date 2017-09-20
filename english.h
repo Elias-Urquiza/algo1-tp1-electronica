@@ -10,14 +10,14 @@
 #define ERR_PREFIJO "ERROR"
 #define ERR_OPCIONES "Invalid option. Please, try again: "
 
-#define ERR_INGRESO_MATERIA "La asignatura fue mal ingresada."
-#define ERR_INGRESO_NOTA "La nota fue mal ingresada."
-#define ERR_INGRESO_CONT_NOTA "La nota fue mal ingresada, por favor vuelva a intentar: "
-#define ERR_REINGRESO_CONT_NOTA "La rescritura de la materia fue de manera incorrecta"
-#define ERR_ELEC "La eleccion realizada no esta permitida."
-#define ERR_MAX_NOTA "Se a llegado a la maxima cantidad de asignaturas ingresada."
+#define ERR_INGRESO_MATERIA "Invalid Input. The Course couldn't be read."
+#define ERR_INGRESO_NOTA "Invalid Grade."
+#define ERR_INGRESO_CONT_NOTA "Grade must be a valid number ranging from 0 to 10, please try again: "
+#define ERR_REINGRESO_CONT_NOTA "Invalid Course Rewrite."
+#define ERR_ELEC "Invalid Choice."
+#define ERR_MAX_NOTA "You have reached the maximum number of courses allowed."
 
-#define ERR_REG_NOMBRE "The name you typed couldn't be read."
+#define ERR_REG_NOMBRE "The name you typed in couldn't be read."
 #define ERR_REG_PADRON "The college ID you typed couldn't be read."
 #define ERR_REG_CARRERA "Invalid Career Number."
 
