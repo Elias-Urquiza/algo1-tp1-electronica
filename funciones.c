@@ -259,7 +259,7 @@ usuario_t asignaturas(usuario_t usuario)
 
 		{
 			NUMERO = atoi(ELEC);  /*Modificacion para que se guarde el numero ingresado en vez de su equivalente en ASCII*/
-			if(NUMERO >= CANT_MAT || CANT_MAT == 0 || (NUMERO == 0 && ELEC[0] != 0))
+			if(NUMERO >= CANT_MAT || CANT_MAT == 0 || (NUMERO == 0 && ELEC[0] != ASCII_CERO))
 			{
 				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
 			}
