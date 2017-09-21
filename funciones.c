@@ -162,7 +162,7 @@ usuario_t asignaturas(usuario_t usuario)
 
 		if(ELEC[0] == AGREGAR)
 		{
-			if(CANT_MAT == NUMERO_MAX_ASIGNATURAS)
+			if(CANT_MAT >= NUMERO_MAX_ASIGNATURAS) /*Preveo que no se pase*/
 			{
 				fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_MAX_NOTA);
 			}
@@ -247,6 +247,10 @@ usuario_t asignaturas(usuario_t usuario)
 						usuario.notas[ELEC_BORR] = usuario.notas[ELEC_BORR + 1];
 						ELEC_BORR++;
 					}
+					
+					clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, ELEC_BORR); /*Eliminacion de la ultima variable para preveer datos basura*/
+					usuario.notas[ELEC_BORR] = 0;
+					
 					CANT_MAT--;
 				}
 			}
