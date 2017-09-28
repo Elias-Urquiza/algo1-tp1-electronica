@@ -1,11 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "funciones.h"
 
 /* MAIN */
 
 /*-------------------------------------------------------*/
+char menu_principal(int *tentativa)
+{
+	char letter = '\0';
+
+	imprimir_menu_principal();
+
+	while ((scanf("%c", &letter) != 1) && (*tentativa < MAX_TRY))
+	{
+		fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+		*tentativa++;
+		clear_buffer();
+	}
+
+	clear_buffer();
+	letter = toupper(letter);
+	return letter;
+}
+
+
 void imprimir_menu_principal(void)
 {
 	puts(MSJ_MAIN);
@@ -39,88 +59,88 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 		switch(input_i)
 		{
-			case REGISTRO_OPCION_NOMBRE_CHAR:
-			{
-				input_i = '\0'
-				i = 0; /*reinicio variables*/
+		case REGISTRO_OPCION_NOMBRE_CHAR:
+		{
+			input_i = '\0';
+			i = 0;           /*reinicio variables*/
 
-				printf("%s: ", REGISTRO_ING_APELLIDO);
-				if(scanf("%s", usuario.apellido) != 1)
-				{
-					fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
-				}
+			printf("%s: ", REGISTRO_ING_APELLIDO);
+			if(scanf("%s", usuario.apellido) != 1)
+			{
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
+			}
+			clear_buffer();
+
+			printf("%s: ", REGISTRO_ING_NOMBRE);
+
+			if(scanf("%s", usuario.nombre) != 1)
+			{
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
+			}
+			clear_buffer();
+
+			printf("%s: %s, %s\n", REGISTRO_ING_AVISO, usuario.apellido, usuario.nombre);
+
+			break;
+		}
+
+		case REGISTRO_OPCION_PADRON_CHAR:
+		{
+			input_i = '\0';
+			i = 0;           /*reinicio variables*/
+
+			printf("%s: ", REGISTRO_ING_PADRON);
+
+			while ((scanf("%i", &usuario.padron) != 1) && i < MAX_TRY)
+			{
+				fprintf(stdout, "%s: %s\n%s", ERR_PREFIJO, ERR_REG_PADRON, ERR_OPCIONES);
+				i++;
 				clear_buffer();
-
-				printf("%s: ", REGISTRO_ING_NOMBRE);
-
-				if(scanf("%s", usuario.nombre) != 1)
-				{
-					fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_NOMBRE);
-				}
-				clear_buffer();
-
-				printf("%s: %s, %s\n", REGISTRO_ING_AVISO, usuario.apellido, usuario.nombre);
-
-				break;
 			}
+			clear_buffer();
 
-			case REGISTRO_OPCION_PADRON_CHAR:
+			printf("%s: %i\n", REGISTRO_ING_AVISO, usuario.padron);
+
+			break;
+		}
+
+		case REGISTRO_OPCION_CARRERA_CHAR:
+		{
+			input_i = '\0';
+			i = 0;           /*reinicio variables*/
+
+			printf("%s: ", REGISTRO_ING_CARRERA);
+			if(scanf("%i", &usuario.num_carrera) != 1)
 			{
-				input_i = '\0'
-				i = 0; /*reinicio variables*/
-
-				printf("%s: ", REGISTRO_ING_PADRON);
-
-				while ((scanf("%i", &usuario.padron) != 1) && i < MAX_TRY)
-				{
-					fprintf(stdout, "%s: %s\n%s", ERR_PREFIJO, ERR_REG_PADRON, ERR_OPCIONES);
-					i++;
-					clear_buffer();
-				}
-				clear_buffer();
-
-				printf("%s: %i\n", REGISTRO_ING_AVISO, usuario.padron);
-
-				break;
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_CARRERA);
 			}
+			while(getchar() != '\n') ;
 
-			case REGISTRO_OPCION_CARRERA_CHAR:
+			printf("%s: ", REGISTRO_ING_AVISO);
+			imprimir_carrera_aviso(usuario.num_carrera, carreras);
+
+			printf("\n");
+
+			break;
+		}
+
+		case REGISTRO_OPCION_VOLVER_CHAR:
+		{
+			return usuario;
+			break;
+		}
+
+		default:
+		{
+			if(scanf("%c", &input_i) != 1)
 			{
-				input_i = '\0'
-				i = 0; /*reinicio variables*/
-
-				printf("%s: ", REGISTRO_ING_CARRERA);
-				if(scanf("%i", &usuario.num_carrera) != 1)
-				{
-					fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_CARRERA);
-				}
-				while(getchar() != '\n');
-
-				printf("%s: ", REGISTRO_ING_AVISO);
-				imprimir_carrera_aviso(usuario.num_carrera, carreras);
-
-				printf("\n");
-
-				break;
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+				i++;
+				if(i >= 3)
+					input_i = MAIN_OPCION_SALIR_CHAR;
 			}
-
-			case REGISTRO_OPCION_VOLVER_CHAR:
-			{
-				return usuario;
-				break;
-			}
-
-			case default:
-			{
-				if(scanf("%c", &input_i) != 1)
-				{
-					fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-					i++;
-					if(i >= 3)
-						input_i = MAIN_OPCION_SALIR_CHAR;
-				}
-				clear_buffer(); /*verifica que el input sea válido y le da al usuario 3 oportunidades antes de devolverlo al menu principal*/
-			}
+			clear_buffer();         /*verifica que el input sea válido y le da al usuario 3 oportunidades antes de devolverlo al menu principal*/
+		}
 		}
 	}
 }
@@ -129,10 +149,10 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 /*imprime sub-menú*/
 void imprimir_menu_registro(void)
 {
-	printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ",REGISTRO_OPCION_NOMBRE_CHAR, REGISTRO_OPCION_NOMBRE);
+	printf("\t%c) %s\n",REGISTRO_OPCION_NOMBRE_CHAR, REGISTRO_OPCION_NOMBRE);
 	printf("\t%c) %s\n", REGISTRO_OPCION_PADRON_CHAR, REGISTRO_OPCION_PADRON);
 	printf("\t%c) %s\n", REGISTRO_OPCION_CARRERA_CHAR, REGISTRO_OPCION_CARRERA);
-	printf("\t%c) %s\n", REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
+	printf("\t%c) %s\n?", REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
 }
 
 /*-------------------------------------------------------*/
@@ -422,108 +442,86 @@ void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BO
 usuario_t metrica (usuario_t usuario)
 {
 	estado_metrica estado = MAIN_METRICA;
-	char letter = '\0';
-	int i = 0;
 	float promedioAsignaturas;
 	int cantidadAsignaturas = cantidad(usuario);
-	int index;
+	int index, i;
 
 	while(estado != VOLVER) /*inicializa el sub-menú y lo mantiene dentro del mismo hasta que el usuario elija salir*/
 	{
 		switch(estado)
 		{
-			/*menu principal*/
-			case MAIN_METRICA:
-			{
-
-				puts(MSJ_METRICA);
-				printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO, METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO, METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO, METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD, METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS, METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
-
-				letter = '\0';
-				i = 0;
-
-				while((i < MAX_TRY) && (letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
-				{
-					scanf("%c", &letter);
-					if((letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
-					{
-						printf("%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-						i++;
-						if (i >= 3)
-							letter = '0';
-					}
-					clear_buffer();
-				}
-
-				estado = letter;
-				break;
-			}
+		/*menu principal*/
+		case MAIN_METRICA:
+		{
+			estado = imprimir_menu_metrica();
+			break;
+		}
 
 /*calcula promedio usando su funcion respectiva*/
-			case PROMEDIO:
-			{
-				printf(MSJ_PROMEDIO);
-				promedioAsignaturas = promedio(usuario, cantidadAsignaturas);
-				printf("%.1f\n", promedioAsignaturas);
-				estado = MAIN_METRICA;
-				break;
-			}
+		case PROMEDIO:
+		{
+			printf(MSJ_PROMEDIO);
+			promedioAsignaturas = promedio(usuario, cantidadAsignaturas);
+			printf("%.1f\n", promedioAsignaturas);
+			estado = MAIN_METRICA;
+			break;
+		}
 
 /*calcula nota maxima y expresa en cual materia es usando la funcion maximo();*/
-			case MAXIMO:
+		case MAXIMO:
+		{
+			printf(MSJ_MAXIMO);
+			index = maximo(usuario, cantidadAsignaturas);
+
+			for( i = 0; usuario.asignaturas[index][i + 1] != '\0'; i++)
 			{
-				printf(MSJ_MAXIMO);
-				index = maximo(usuario, cantidadAsignaturas);
-
-				for( i = 0; usuario.asignaturas[index][i + 1] != '\0'; i++)
-				{
-					printf("%c", usuario.asignaturas[index][i]);
-				}
-				printf(" (%i)\n", usuario.notas[index]);
-
-				estado = MAIN_METRICA;
-				break;
+				printf("%c", usuario.asignaturas[index][i]);
 			}
+			printf(" (%i)\n", usuario.notas[index]);
+
+			estado = MAIN_METRICA;
+			break;
+		}
 
 /*calcula nota minima y expresa en cual materia es usando la funcion minimo();*/
-			case MINIMO:
+		case MINIMO:
+		{
+			printf(MSJ_MINIMO);
+			index = minimo(usuario, cantidadAsignaturas);
+
+			for( i = 0; usuario.asignaturas[index][i + 1] != '\0'; i++)
 			{
-				printf(MSJ_MINIMO);
-				index = minimo(usuario, cantidadAsignaturas);
-
-				for( i = 0; usuario.asignaturas[index][i + 1] != '\0'; i++)
-				{
-					printf("%c", usuario.asignaturas[index][i]);
-				}
-				printf(" (%i)\n", usuario.notas[index]);
-
-				estado = MAIN_METRICA;
-				break;
+				printf("%c", usuario.asignaturas[index][i]);
 			}
+			printf(" (%i)\n", usuario.notas[index]);
+
+			estado = MAIN_METRICA;
+			break;
+		}
 
 /*calcula la cantidad de materias cursadas con su funcion correspondiente*/
-			case CANTIDAD:
-			{
-				printf(MSJ_CANTIDAD);
-				printf("%i\n", cantidadAsignaturas);
-				estado = MAIN_METRICA;
-				break;
-			}
+		case CANTIDAD:
+		{
+			printf(MSJ_CANTIDAD);
+			printf("%i\n", cantidadAsignaturas);
+			estado = MAIN_METRICA;
+			break;
+		}
 
 /*calcula la cantidad de aplazos con su funcion correspondiente*/
-			case APLAZOS:
-			{
-				printf(MSJ_APLAZOS);
-				printf("%i\n", aplazos(usuario, cantidadAsignaturas));
-				estado = MAIN_METRICA;
-				break;
-			}
+		case APLAZOS:
+		{
+			printf(MSJ_APLAZOS);
+			printf("%i\n", aplazos(usuario, cantidadAsignaturas));
+			estado = MAIN_METRICA;
+			break;
+		}
 
-			case VOLVER:
-			{
-				NULL;
-				break;
-			}
+		case VOLVER:
+		{
+			NULL;
+			break;
+		}
 
 		}
 	}
@@ -531,6 +529,33 @@ usuario_t metrica (usuario_t usuario)
 	return usuario;
 
 }
+
+
+char imprimir_menu_metrica()
+{
+
+	char letter = '\0';
+	int i = 0;
+
+	puts(MSJ_METRICA);
+	printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO, METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO, METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO, METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD, METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS, METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
+
+	while((i < MAX_TRY) && (letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
+	{
+		scanf("%c", &letter);
+		if((letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
+		{
+			printf("%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+			i++;
+			if (i >= 3)
+				letter = '0';
+		}
+		clear_buffer();
+	}
+
+	return letter;
+}
+
 
 
 int cantidad (usuario_t usuario)
@@ -623,6 +648,7 @@ usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERA
 	imprimir_carrera_fin(usuario.num_carrera, carreras); /*imprime la carrera elegida por stderr*/
 	fprintf(stderr, "%i, %.2f, %i\n",cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas)); /*imprime los datos restantes por stderr*/
 	return reinit(usuario);
+	clear_buffer();
 }
 
 /*-------------------------------------------------------*/

@@ -57,6 +57,7 @@ typedef struct
 
 
 /*funcionnes del main*/
+char menu_principal(int *tentativa);
 void imprimir_menu_principal(void);
 usuario_t reinit(usuario_t);
 void clear_buffer(void);
@@ -83,6 +84,7 @@ typedef enum
 	MAIN_METRICA, PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, MAXIMO = METRICA_OPCION_MAXIMO_CHAR, MINIMO = METRICA_OPCION_MINIMO_CHAR, CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, APLAZOS = METRICA_OPCION_APLAZOS_CHAR, VOLVER = METRICA_OPCION_VOLVER_CHAR
 }estado_metrica;
 
+char imprimir_menu_metrica();
 float promedio(usuario_t, int);
 int cantidad(usuario_t);
 int maximo(usuario_t, int);
