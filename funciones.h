@@ -1,9 +1,5 @@
-#ifndef MAIN__H
-#define MAIN__H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#ifndef FUNCIONES__H
+#define FUNCIONES__H
 
 /*define lenguaje*/
 #define ESPANOL
@@ -61,6 +57,7 @@ typedef struct
 
 
 /*funcionnes del main*/
+void imprimir_menu_principal(void);
 usuario_t reinit(usuario_t);
 void clear_buffer(void);
 usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
@@ -70,6 +67,7 @@ usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERA
 
 
 /*funcionnes de registro*/
+void imprimir_menu_registro(void);
 void imprimir_carrera_aviso(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 void imprimir_carrera_fin(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
