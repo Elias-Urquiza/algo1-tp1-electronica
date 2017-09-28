@@ -7,7 +7,7 @@
 /* MENU*/
 
 /*-------------------------------------------------------*/
-char menu (estado_main estado, int *tentativa)
+char menu (estado_main estado, int *intentos)
 {
 	char letter = '\0';
 
@@ -19,10 +19,10 @@ char menu (estado_main estado, int *tentativa)
 	default: NULL; break;
 	}
 
-	while ((scanf("%c", &letter) != 1) && (*tentativa < MAX_TRY))
+	while ((scanf("%c", &letter) != 1) && (*intentos < MAX_TRY))
 	{
 		fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-		(*tentativa)++;
+		(*intentos)++;
 		clear_buffer();
 	}
 
@@ -66,6 +66,9 @@ void imprimir_menu_metrica(void)
 /*-------------------------------------------------------*/
 
 
+
+
+
 /* REGISTRO */
 
 /*-------------------------------------------------------*/
@@ -74,7 +77,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 {
 	/*inicializo variables*/
 
-	int tentativa = 0, i = 0;
+	int intentos = 0, i = 0;
 	estado_registro estado = MAIN_REGISTRO;
 
 
@@ -87,7 +90,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 		case MAIN_REGISTRO:
 		{
-			estado = menu(MENU_REGISTRO, &tentativa);
+			estado = menu(MENU_REGISTRO, &intentos);
 			break;
 		}
 
@@ -111,7 +114,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			printf("%s: %s, %s\n", REGISTRO_ING_AVISO, usuario.apellido, usuario.nombre);
 
 			estado = MAIN_REGISTRO;
-			tentativa = 0;           /*reinicio variables*/
+			intentos = 0;           /*reinicio variables*/
 			break;
 		}
 
@@ -130,7 +133,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			printf("%s: %i\n", REGISTRO_ING_AVISO, usuario.padron);
 
 			estado = MAIN_REGISTRO;
-			tentativa = 0;           /*reinicio variables*/
+			intentos = 0;           /*reinicio variables*/
 			break;
 		}
 
@@ -149,7 +152,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			printf("\n");
 
 			estado = MAIN_REGISTRO;
-			tentativa = 0;           /*reinicio variables*/
+			intentos = 0;           /*reinicio variables*/
 			break;
 		}
 
@@ -161,9 +164,9 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 		default:
 		{
-			tentativa++;
+			intentos++;
 
-			if (tentativa > MAX_TRY)
+			if (intentos > MAX_TRY)
 			{
 				fprintf(stdout, "%s\n", ERR_PREFIJO);
 				estado = VOLVER_R;
@@ -186,7 +189,6 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 
 /*-------------------------------------------------------*/
-
 
 
 
@@ -474,7 +476,7 @@ usuario_t metrica (usuario_t usuario)
 	estado_metrica estado = MAIN_METRICA;
 	float promedioAsignaturas;
 	int cantidadAsignaturas = cantidad(usuario);
-	int index, i, tentativa = 0;
+	int index, i, intentos = 0;
 
 	while(estado != VOLVER_M) /*inicializa el sub-menú y lo mantiene dentro del mismo hasta que el usuario elija salir*/
 	{
@@ -483,7 +485,7 @@ usuario_t metrica (usuario_t usuario)
 		/*menu principal*/
 		case MAIN_METRICA:
 		{
-			estado = menu(MENU_METRICA, &tentativa);
+			estado = menu(MENU_METRICA, &intentos);
 			break;
 		}
 
@@ -557,9 +559,9 @@ usuario_t metrica (usuario_t usuario)
 
 		default:
 		{
-			tentativa++;
+			intentos++;
 
-			if (tentativa > MAX_TRY)
+			if (intentos > MAX_TRY)
 			{
 				fprintf(stdout, "%s\n", ERR_PREFIJO);
 				estado = VOLVER_M;

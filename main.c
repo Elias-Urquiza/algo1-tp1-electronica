@@ -9,7 +9,7 @@ int main(void)
 	char carreras[LENGTH_MAX_CARRERAS][LENGTH_MAX_NOMBRE_CARRERAS] = {{ING_0}, {ING_1}, {ING_2}, {ING_3}, {ING_4}, {ING_5}, {ING_6}, {ING_7}, {ING_8}, {ING_9}, {ING_10}, {ING_11}};
 	estado_main estado = MAIN_MENU;
 	usuario_t alumno;
-	int tentativa = 0;
+	int intentos = 0;
 
 	alumno = reinit(alumno); /*inicializa las variables de la struct*/
 
@@ -24,7 +24,7 @@ int main(void)
 
 		case MAIN_MENU:
 		{
-			estado = menu(MAIN_MENU, &tentativa);
+			estado = menu(MAIN_MENU, &intentos);
 			break;
 		}
 
@@ -32,7 +32,7 @@ int main(void)
 		{
 			alumno = registro(alumno, carreras);
 			estado = MAIN_MENU;
-			tentativa = 0;
+			intentos = 0;
 			break;
 		}
 
@@ -40,7 +40,7 @@ int main(void)
 		{
 			alumno = asignaturas(alumno);
 			estado = MAIN_MENU;
-			tentativa = 0;
+			intentos = 0;
 			break;
 		}
 
@@ -48,7 +48,7 @@ int main(void)
 		{
 			alumno = metrica(alumno);
 			estado = MAIN_MENU;
-			tentativa = 0;
+			intentos = 0;
 			break;
 		}
 
@@ -56,7 +56,7 @@ int main(void)
 		{
 			alumno = finalizar(alumno, carreras);
 			estado = MAIN_MENU;
-			tentativa = 0;
+			intentos = 0;
 			break;
 		}
 
@@ -68,9 +68,9 @@ int main(void)
 
 		default:
 		{
-			tentativa++;
+			intentos++;
 
-			if (tentativa > MAX_TRY)
+			if (intentos > MAX_TRY)
 			{
 				fprintf(stdout, "%s\n", ERR_PREFIJO);
 				estado = MAIN_SALIR;
