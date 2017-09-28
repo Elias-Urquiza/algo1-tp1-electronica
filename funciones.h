@@ -66,9 +66,18 @@ usuario_t asignaturas(usuario_t usuario);
 usuario_t metrica(usuario_t);
 usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
-
-/*funcionnes de registro*/
+/*funciones de menu*/
+char menu(estado_main, int *tentativa);
+void imprimir_menu_principal(void);
 void imprimir_menu_registro(void);
+void imprimir_menu_metrica(void);
+
+/*funcionnes y tipos de registro*/
+typedef enum
+{
+	MAIN_REGISTRO, NOMBRE = REGISTRO_OPCION_NOMBRE_CHAR, PADRON = REGISTRO_OPCION_PADRON_CHAR, CARRERA = REGISTRO_OPCION_CARRERA_CHAR, VOLVER_R = REGISTRO_OPCION_VOLVER_CHAR
+}estado_registro;
+
 void imprimir_carrera_aviso(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 void imprimir_carrera_fin(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
@@ -81,10 +90,9 @@ void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BO
 /*funcionnes y tipos de metrica*/
 typedef enum
 {
-	MAIN_METRICA, PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, MAXIMO = METRICA_OPCION_MAXIMO_CHAR, MINIMO = METRICA_OPCION_MINIMO_CHAR, CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, APLAZOS = METRICA_OPCION_APLAZOS_CHAR, VOLVER = METRICA_OPCION_VOLVER_CHAR
+	MAIN_METRICA, PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, MAXIMO = METRICA_OPCION_MAXIMO_CHAR, MINIMO = METRICA_OPCION_MINIMO_CHAR, CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, APLAZOS = METRICA_OPCION_APLAZOS_CHAR, VOLVER_M = METRICA_OPCION_VOLVER_CHAR
 }estado_metrica;
 
-char imprimir_menu_metrica();
 float promedio(usuario_t, int);
 int cantidad(usuario_t);
 int maximo(usuario_t, int);

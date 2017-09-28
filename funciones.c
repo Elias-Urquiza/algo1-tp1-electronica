@@ -4,28 +4,35 @@
 #include <ctype.h>
 #include "funciones.h"
 
-/* MAIN */
+/* MENU*/
 
 /*-------------------------------------------------------*/
-char menu_principal(int *tentativa)
+char menu (estado_main estado, int *tentativa)
 {
 	char letter = '\0';
 
-	imprimir_menu_principal();
+	switch (estado) {
+	case MAIN_MENU: imprimir_menu_principal(); break;
+	case MENU_REGISTRO: imprimir_menu_registro(); break;
+	/*case MENU_ASIGNATURAS: imprimir_menu_asignaturas();*/
+	case MENU_METRICA: imprimir_menu_metrica(); break;
+	default: NULL; break;
+	}
 
 	while ((scanf("%c", &letter) != 1) && (*tentativa < MAX_TRY))
 	{
 		fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-		*tentativa++;
+		(*tentativa)++;
 		clear_buffer();
 	}
 
 	clear_buffer();
-	letter = toupper(letter);
+	if ((letter != 'm') || (estado != MENU_METRICA)) /*para hacer la diferencia enter Maximo y minimo*/
+		letter = toupper(letter); /*poner en majuscula*/
 	return letter;
 }
 
-
+/*imprime menús*/
 void imprimir_menu_principal(void)
 {
 	puts(MSJ_MAIN);
@@ -34,6 +41,26 @@ void imprimir_menu_principal(void)
 	printf("\t%c) %s\n", MAIN_OPCION_3_CHAR, MAIN_OPCION_3);
 	printf("\t%c) %s\n", MAIN_OPCION_FINALIZAR_CHAR, MAIN_OPCION_FINALIZAR);
 	printf("\t%c) %s\n?", MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
+}
+
+void imprimir_menu_registro(void)
+{
+	puts(MSJ_REGISTRO);
+	printf("\t%c) %s\n",REGISTRO_OPCION_NOMBRE_CHAR, REGISTRO_OPCION_NOMBRE);
+	printf("\t%c) %s\n", REGISTRO_OPCION_PADRON_CHAR, REGISTRO_OPCION_PADRON);
+	printf("\t%c) %s\n", REGISTRO_OPCION_CARRERA_CHAR, REGISTRO_OPCION_CARRERA);
+	printf("\t%c) %s\n?", REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
+}
+
+void imprimir_menu_metrica(void)
+{
+	puts(MSJ_METRICA);
+	printf("\t%c) %s\n", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO);
+	printf("\t%c) %s\n", METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO);
+	printf("\t%c) %s\n", METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO);
+	printf("\t%c) %s\n", METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD);
+	printf("\t%c) %s\n", METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS);
+	printf("\t%c) %s\n?", METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
 }
 
 /*-------------------------------------------------------*/
@@ -47,23 +74,25 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 {
 	/*inicializo variables*/
 
-	char input_i = '\0'; /*variable para switch*/
-	int i = 0; /*contador para reintentos*/
+	int tentativa = 0, i = 0;
+	estado_registro estado = MAIN_REGISTRO;
 
-	puts(MSJ_REGISTRO);
 
 	/*Inicia un loop en el que se encontrará el sub-menú: */
-	while(1)
+	while(estado != VOLVER_R)
 	{
-		imprimir_menu_registro();
 
-		switch(input_i)
+		switch(estado)
 		{
-		case REGISTRO_OPCION_NOMBRE_CHAR:
-		{
-			input_i = '\0';
-			i = 0;           /*reinicio variables*/
 
+		case MAIN_REGISTRO:
+		{
+			estado = menu(MENU_REGISTRO, &tentativa);
+			break;
+		}
+
+		case NOMBRE:
+		{
 			printf("%s: ", REGISTRO_ING_APELLIDO);
 			if(scanf("%s", usuario.apellido) != 1)
 			{
@@ -81,14 +110,13 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 			printf("%s: %s, %s\n", REGISTRO_ING_AVISO, usuario.apellido, usuario.nombre);
 
+			estado = MAIN_REGISTRO;
+			tentativa = 0;           /*reinicio variables*/
 			break;
 		}
 
-		case REGISTRO_OPCION_PADRON_CHAR:
+		case PADRON:
 		{
-			input_i = '\0';
-			i = 0;           /*reinicio variables*/
-
 			printf("%s: ", REGISTRO_ING_PADRON);
 
 			while ((scanf("%i", &usuario.padron) != 1) && i < MAX_TRY)
@@ -101,14 +129,13 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 			printf("%s: %i\n", REGISTRO_ING_AVISO, usuario.padron);
 
+			estado = MAIN_REGISTRO;
+			tentativa = 0;           /*reinicio variables*/
 			break;
 		}
 
-		case REGISTRO_OPCION_CARRERA_CHAR:
+		case CARRERA:
 		{
-			input_i = '\0';
-			i = 0;           /*reinicio variables*/
-
 			printf("%s: ", REGISTRO_ING_CARRERA);
 			if(scanf("%i", &usuario.num_carrera) != 1)
 			{
@@ -121,39 +148,42 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 			printf("\n");
 
+			estado = MAIN_REGISTRO;
+			tentativa = 0;           /*reinicio variables*/
 			break;
 		}
 
-		case REGISTRO_OPCION_VOLVER_CHAR:
+		case VOLVER_R:
 		{
-			return usuario;
+			estado = VOLVER_R;
 			break;
 		}
 
 		default:
 		{
-			if(scanf("%c", &input_i) != 1)
+			tentativa++;
+
+			if (tentativa > MAX_TRY)
+			{
+				fprintf(stdout, "%s\n", ERR_PREFIJO);
+				estado = VOLVER_R;
+			}
+			else
 			{
 				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-				i++;
-				if(i >= 3)
-					input_i = MAIN_OPCION_SALIR_CHAR;
+				estado = MAIN_REGISTRO;
 			}
-			clear_buffer();         /*verifica que el input sea válido y le da al usuario 3 oportunidades antes de devolverlo al menu principal*/
+			break;
 		}
+
 		}
+
 	}
+
+	return usuario;
 }
 
 
-/*imprime sub-menú*/
-void imprimir_menu_registro(void)
-{
-	printf("\t%c) %s\n",REGISTRO_OPCION_NOMBRE_CHAR, REGISTRO_OPCION_NOMBRE);
-	printf("\t%c) %s\n", REGISTRO_OPCION_PADRON_CHAR, REGISTRO_OPCION_PADRON);
-	printf("\t%c) %s\n", REGISTRO_OPCION_CARRERA_CHAR, REGISTRO_OPCION_CARRERA);
-	printf("\t%c) %s\n?", REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
-}
 
 /*-------------------------------------------------------*/
 
@@ -444,16 +474,16 @@ usuario_t metrica (usuario_t usuario)
 	estado_metrica estado = MAIN_METRICA;
 	float promedioAsignaturas;
 	int cantidadAsignaturas = cantidad(usuario);
-	int index, i;
+	int index, i, tentativa = 0;
 
-	while(estado != VOLVER) /*inicializa el sub-menú y lo mantiene dentro del mismo hasta que el usuario elija salir*/
+	while(estado != VOLVER_M) /*inicializa el sub-menú y lo mantiene dentro del mismo hasta que el usuario elija salir*/
 	{
 		switch(estado)
 		{
 		/*menu principal*/
 		case MAIN_METRICA:
 		{
-			estado = menu_metrica();
+			estado = menu(MENU_METRICA, &tentativa);
 			break;
 		}
 
@@ -517,55 +547,39 @@ usuario_t metrica (usuario_t usuario)
 			break;
 		}
 
-		case VOLVER:
+		case VOLVER_M:
 		{
-			NULL;
+			estado = VOLVER_M;
 			break;
 		}
 
+
+
+		default:
+		{
+			tentativa++;
+
+			if (tentativa > MAX_TRY)
+			{
+				fprintf(stdout, "%s\n", ERR_PREFIJO);
+				estado = VOLVER_M;
+			}
+			else
+			{
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+				estado = MAIN_METRICA;
+			}
+			break;
 		}
-	}
+
+		} /*end of switch*/
+
+	} /*end of while*/
 
 	return usuario;
 
 }
 
-
-char menu_metrica()
-{
-
-	char letter = '\0';
-	int i = 0;
-
-	imprimir_menu_metrica();
-
-	while((i < MAX_TRY) && (letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
-	{
-		scanf("%c", &letter);
-		if((letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
-		{
-			printf("%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-			i++;
-			if (i >= 3)
-				letter = '0';
-		}
-		clear_buffer();
-	}
-
-	return letter;
-}
-
-
-void imprimir_menu_metrica(void)
-{
-	puts(MSJ_METRICA);
-	printf("\t%c) %s\n", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO);
-	printf("\t%c) %s\n", METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO);
-	printf("\t%c) %s\n", METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO);
-	printf("\t%c) %s\n", METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD);
-	printf("\t%c) %s\n", METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS);
-	printf("\t%c) %s\n?", METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
-}
 
 
 int cantidad (usuario_t usuario)

@@ -24,45 +24,46 @@ int main(void)
 
 		case MAIN_MENU:
 		{
-			estado = menu_principal(&tentativa);
+			estado = menu(MAIN_MENU, &tentativa);
 			break;
 		}
 
 		case MENU_REGISTRO:
 		{
-			int tentativa = 0;
 			alumno = registro(alumno, carreras);
 			estado = MAIN_MENU;
+			tentativa = 0;
 			break;
 		}
 
 		case MENU_ASIGNATURAS:
 		{
-			int tentativa = 0;
 			alumno = asignaturas(alumno);
 			estado = MAIN_MENU;
+			tentativa = 0;
 			break;
 		}
 
 		case MENU_METRICA:
 		{
-			int tentativa = 0;
 			alumno = metrica(alumno);
 			estado = MAIN_MENU;
+			tentativa = 0;
 			break;
 		}
 
 		case MENU_FINALIZAR:
 		{
-			int tentativa = 0;
 			alumno = finalizar(alumno, carreras);
 			estado = MAIN_MENU;
+			tentativa = 0;
 			break;
 		}
 
 		case MAIN_SALIR:
 		{
 			estado = MAIN_SALIR;
+			break;
 		}
 
 		default:
