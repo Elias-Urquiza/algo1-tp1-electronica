@@ -453,7 +453,7 @@ usuario_t metrica (usuario_t usuario)
 		/*menu principal*/
 		case MAIN_METRICA:
 		{
-			estado = imprimir_menu_metrica();
+			estado = menu_metrica();
 			break;
 		}
 
@@ -531,14 +531,13 @@ usuario_t metrica (usuario_t usuario)
 }
 
 
-char imprimir_menu_metrica()
+char menu_metrica()
 {
 
 	char letter = '\0';
 	int i = 0;
 
-	puts(MSJ_METRICA);
-	printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO, METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO, METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO, METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD, METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS, METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
+	imprimir_menu_metrica();
 
 	while((i < MAX_TRY) && (letter != METRICA_OPCION_PROMEDIO_CHAR) && (letter != METRICA_OPCION_MAXIMO_CHAR) && (letter != METRICA_OPCION_MINIMO_CHAR) && (letter != METRICA_OPCION_CANTIDAD_CHAR) && (letter != METRICA_OPCION_APLAZOS_CHAR) && (letter != METRICA_OPCION_VOLVER_CHAR))
 	{
@@ -556,6 +555,17 @@ char imprimir_menu_metrica()
 	return letter;
 }
 
+
+void imprimir_menu_metrica(void)
+{
+	puts(MSJ_METRICA);
+	printf("\t%c) %s\n", METRICA_OPCION_PROMEDIO_CHAR, METRICA_OPCION_PROMEDIO);
+	printf("\t%c) %s\n", METRICA_OPCION_MAXIMO_CHAR, METRICA_OPCION_MAXIMO);
+	printf("\t%c) %s\n", METRICA_OPCION_MINIMO_CHAR, METRICA_OPCION_MINIMO);
+	printf("\t%c) %s\n", METRICA_OPCION_CANTIDAD_CHAR, METRICA_OPCION_CANTIDAD);
+	printf("\t%c) %s\n", METRICA_OPCION_APLAZOS_CHAR, METRICA_OPCION_APLAZOS);
+	printf("\t%c) %s\n?", METRICA_OPCION_VOLVER_CHAR, METRICA_OPCION_VOLVER);
+}
 
 
 int cantidad (usuario_t usuario)
