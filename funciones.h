@@ -21,7 +21,7 @@
 /*Parametros de usuario_t*/
 #define LENGTH_MAX_NOMBRE 50
 #define LENGTH_MAX_ASIGNATURA 30
-#define NUMERO_MAX_ASIGNATURAS 50
+#define NUMERO_MAX_ASIGNATURAS 10
 
 /* Otros parametros */
 #define MAX_TRY 3
