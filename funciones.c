@@ -728,7 +728,7 @@ usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERA
 	int cantidadAsignaturas = cantidad(usuario);
 	fprintf(stderr, "%s %s, %i, ",  usuario.nombre, usuario.apellido, usuario.padron); /*imprime nombre, apellido y padrón por stderr*/
 	imprimir_carrera_fin(usuario.num_carrera, carreras); /*imprime la carrera elegida por stderr*/
-	fprintf(stderr, "%i, %.2f, %i\n",cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas)); /*imprime los datos restantes por stderr*/
+	fprintf(stderr, "%i, %.1f, %i\n",cantidadAsignaturas, promedio(usuario, cantidadAsignaturas), aplazos(usuario, cantidadAsignaturas)); /*imprime los datos restantes por stderr*/
 	return reinit(usuario);
 	clear_buffer();
 }

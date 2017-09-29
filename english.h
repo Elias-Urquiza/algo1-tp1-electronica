@@ -48,17 +48,16 @@
 #define ING_11 "Food Engineering"
 
 /* Courses */
-#define ASIGNATURA_OPCION_INGRESO "+) Add a Course"
-#define ASIGNATURA_OPCION_SALIDA "!) Exit"
-#define ASIGNATURA_OPCION_BORRAR "-) Delete Course"
+#define ASIGNATURA_OPCION_INGRESO "Add a Course"
+#define ASIGNATURA_OPCION_SALIDA "Exit"
+#define ASIGNATURA_OPCION_BORRAR "Delete Course"
+#define ASIGNATURA_OPCION_INGRESO_CHAR '+'
+#define ASIGNATURA_OPCION_SALIDA_CHAR '!'
+#define ASIGNATURA_OPCION_BORRAR_CHAR '-'
 #define ASIGNATURA_OPCION_PREGUNTA "? "
 #define TEXT_NOTA "Insert your course grade: "
 #define TEXT_MATERIA "Insert your course: "
 #define TEXT_ELEC_BORRAR "Insert the number of the course you wish to delete: "
-
-#define AGREGAR '+'
-#define ELIMINAR '-'
-#define SALIR '!'
 
 /* Registry */
 #define MSJ_REGISTRO "Registry Menu. Pick an option to modify the logged data."

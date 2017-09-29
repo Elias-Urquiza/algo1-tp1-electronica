@@ -2,7 +2,7 @@
 #define FUNCIONES__H
 
 /*define lenguaje*/
-#define ESPANOL
+#define ENGLISH
 
 #ifdef ESPANOL
 #include "espanol.h"
