@@ -24,7 +24,7 @@ int main(void)
 
 		case MAIN_MENU:
 		{
-			estado = menu(MAIN_MENU, &intentos);
+			estado = menu(MAIN_MENU, &intentos, alumno);
 			break;
 		}
 

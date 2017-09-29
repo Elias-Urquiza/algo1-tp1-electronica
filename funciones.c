@@ -7,14 +7,14 @@
 /* MENU*/
 
 /*-------------------------------------------------------*/
-char menu (estado_main estado, int *intentos)
+char menu (estado_main estado, int *intentos, usuario_t usuario)
 {
 	char letter = '\0';
 
 	switch (estado) {
 	case MAIN_MENU: imprimir_menu_principal(); break;
 	case MENU_REGISTRO: imprimir_menu_registro(); break;
-	/*case MENU_ASIGNATURAS: imprimir_menu_asignaturas();*/
+	case MENU_ASIGNATURAS: imprimir_menu_asignaturas(usuario); break;
 	case MENU_METRICA: imprimir_menu_metrica(); break;
 	default: NULL; break;
 	}
@@ -28,7 +28,7 @@ char menu (estado_main estado, int *intentos)
 
 	clear_buffer();
 	if ((letter != 'm') || (estado != MENU_METRICA)) /*para hacer la diferencia enter Maximo y minimo*/
-		letter = toupper(letter); /*poner en majuscula*/
+		letter = toupper(letter); /*poner en mayuscula*/
 	return letter;
 }
 
@@ -50,6 +50,28 @@ void imprimir_menu_registro(void)
 	printf("\t%c) %s\n", REGISTRO_OPCION_PADRON_CHAR, REGISTRO_OPCION_PADRON);
 	printf("\t%c) %s\n", REGISTRO_OPCION_CARRERA_CHAR, REGISTRO_OPCION_CARRERA);
 	printf("\t%c) %s\n?", REGISTRO_OPCION_VOLVER_CHAR, REGISTRO_OPCION_VOLVER);
+}
+
+void imprimir_menu_asignaturas(usuario_t usuario)
+{
+	int cantidadAsignaturas = cantidad(usuario);
+	int i = 0;
+
+	puts(MSJ_MAIN);
+	if(cantidadAsignaturas > 0)
+	{
+		while(i < cantidadAsignaturas)
+		{
+			print_opciones(usuario, LENGTH_MAX_ASIGNATURA, i);
+			i++;
+		}
+
+		printf("\t%c) %s\n", ASIGNATURA_OPCION_BORRAR_CHAR, ASIGNATURA_OPCION_BORRAR);
+	}
+
+	printf("\t%c) %s\n",ASIGNATURA_OPCION_INGRESO_CHAR, ASIGNATURA_OPCION_INGRESO);
+	printf("\t%c) %s\n", ASIGNATURA_OPCION_SALIDA_CHAR, ASIGNATURA_OPCION_SALIDA);
+	printf("%s", ASIGNATURA_OPCION_PREGUNTA);
 }
 
 void imprimir_menu_metrica(void)
@@ -90,7 +112,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 		case MAIN_REGISTRO:
 		{
-			estado = menu(MENU_REGISTRO, &intentos);
+			estado = menu(MENU_REGISTRO, &intentos, usuario);
 			break;
 		}
 
@@ -144,7 +166,7 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 			{
 				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_REG_CARRERA);
 			}
-			while(getchar() != '\n') ;
+			clear_buffer();
 
 			printf("%s: ", REGISTRO_ING_AVISO);
 			imprimir_carrera_aviso(usuario.num_carrera, carreras);
@@ -186,8 +208,6 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 	return usuario;
 }
 
-
-
 /*-------------------------------------------------------*/
 
 
@@ -199,207 +219,179 @@ usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS
 
 /*-------------------------------------------------------*/
 
-
-
-
 usuario_t asignaturas(usuario_t usuario)
 {
 /*Defino un rango de las matrices junto a un par de valores auxiliares*/
+	estado_asignatura estado = MAIN_ASIGNATURA;
+	char lettra;
+	int cantidadAsignaturas;
+	int intentos = 0, numero = -1;
 
-	char ELEC[2]; /*variable modificada para aceptar numero de dos cifras*/
-	int ENTRADA = IN, CANT_MAT = 0, NUMB, ELEC_BORR,COLUMNA, NUMERO, INTENTOS, SALIDA, PROBLEMA;
 
-/*Limpio las matrices de cualquier valor al azar definido por el programa*/
-
-	CANT_MAT=cantidad(usuario); /*Funciòn tomada de Aurelien para registrar la cantidad de materias al volver al submenu*/
-
-/*Ingreso del programa*/
-
-	while(ENTRADA==IN)
+	while(estado != VOLVER_A)
 	{
-		SALIDA=0;
-		INTENTOS=1;
-		NUMB=0;
+		cantidadAsignaturas = cantidad(usuario);
 
-/*Menu inicial*/
-
-		puts(MSJ_MAIN);
-		if(CANT_MAT > 0)
+		switch (estado)
 		{
-			while(NUMB < CANT_MAT)
-			{
-				print_opciones(usuario.asignaturas, usuario.notas, LENGTH_MAX_ASIGNATURA, NUMB);
-				NUMB++;
-			}
 
-			printf("\t%s\n", ASIGNATURA_OPCION_BORRAR);
+		case MAIN_ASIGNATURA:
+		{
+			lettra = menu(MENU_ASIGNATURAS, &intentos, usuario);
+			estado = lettra;
+			break;
 		}
 
-		printf("\t%s\n", ASIGNATURA_OPCION_INGRESO);
-		printf("\t%s\n", ASIGNATURA_OPCION_SALIDA);
-		printf("%s", ASIGNATURA_OPCION_PREGUNTA);
-
-		scanf("%s", ELEC); /*scanf modificado para aceptar una cadena de caracteres y no solo un char*/
-		while(getchar() != '\n') ;
-
-/*Eleccion de ingreso de asignatura*/
-
-		if(ELEC[0] == AGREGAR)
+		case AGRAGAR:
 		{
-			if(CANT_MAT >= NUMERO_MAX_ASIGNATURAS) /*Preveo que no se pase*/
-			{
-				fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_MAX_NOTA);
-			}
+			usuario = agregar(usuario, cantidadAsignaturas);
+			intentos = 0;
+			estado = MAIN_ASIGNATURA;
+			break;
+		}
 
-			else
+		case ELIMINAR:
+		{
+			usuario = eliminar(usuario, cantidadAsignaturas);
+			if (intentos > MAX_TRY)
 			{
-				printf("\n%s", TEXT_MATERIA);
-				fgets(usuario.asignaturas[CANT_MAT], LENGTH_MAX_ASIGNATURA, stdin);
-				printf("%s", TEXT_NOTA);
-				if(scanf("%i", &usuario.notas[CANT_MAT]) != 1 || usuario.notas[CANT_MAT] > MAX_CALIF || usuario.notas[CANT_MAT] < MIN_CANLIF)
+				fprintf(stdout, "%s\n", ERR_PREFIJO);
+				estado = VOLVER_A;
+			}
+			estado = MAIN_ASIGNATURA;
+			break;
+		}
+
+		case VOLVER_A:
+		{
+			estado = VOLVER_A;
+			break;
+		}
+
+		default:
+		{
+			numero = lettra - ASCII_CERO;  /*Modificacion para que se guarde el numero ingresado en vez de su equivalente en ASCII*/
+			if(numero >= cantidadAsignaturas || cantidadAsignaturas == 0 || (numero == 0 && lettra != ASCII_CERO))
+			{
+				intentos++;
+				if (intentos > MAX_TRY)
 				{
-					PROBLEMA=1;
-
-					while(PROBLEMA == 1 && SALIDA != 1)
-					{
-						if(INTENTOS == CANTIDAD_INTENTOS)
-						{
-							fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_INGRESO_MATERIA);
-							clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, CANT_MAT);
-							usuario.notas[CANT_MAT] = 0;
-							CANT_MAT--;
-							SALIDA = 1;
-						}
-
-						else
-						{
-							while(getchar()!='\n') ;
-
-							fprintf(stdout, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
-							if(scanf("%i", &usuario.notas[CANT_MAT]) == 1 && usuario.notas[CANT_MAT] <= MAX_CALIF && usuario.notas[CANT_MAT] >= MIN_CANLIF)
-							{
-								PROBLEMA = 0;
-							}
-						}
-
-						INTENTOS++;
-					}
-				}
-				while(getchar()!='\n') ;
-
-				CANT_MAT++;
-				printf("\n");
-			}
-		}
-
-/*Salida del programa*/
-
-		else if(ELEC[0] == SALIR)
-		{
-			ENTRADA = OUT;
-		}
-
-/*Eliminación de asignatura*/
-
-		else if(ELEC[0] == ELIMINAR)
-		{
-			if(CANT_MAT == 0)
-			{
-				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
-			}
-			else
-			{
-				printf("\n%s", TEXT_ELEC_BORRAR);
-
-				if(scanf("%i", &ELEC_BORR) != 1 ||ELEC_BORR > CANT_MAT - 1 || ELEC_BORR < 0)
-				{
-					while(getchar()!='\n') ;
-
-					fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+					fprintf(stdout, "%s\n", ERR_PREFIJO);
+					estado = VOLVER_A;
 				}
 				else
 				{
-					while(getchar() != '\n') ;  /*limpieza de buffer*/
-
-					while(ELEC_BORR < NUMERO_MAX_ASIGNATURAS - UNO)
-					{
-						for(COLUMNA = 0; COLUMNA < LENGTH_MAX_ASIGNATURA; COLUMNA++)
-						{
-							usuario.asignaturas[ELEC_BORR][COLUMNA] = usuario.asignaturas[ELEC_BORR + 1][COLUMNA];
-						}
-						COLUMNA=0;
-						usuario.notas[ELEC_BORR] = usuario.notas[ELEC_BORR + 1];
-						ELEC_BORR++;
-					}
-
-					clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, ELEC_BORR); /*Eliminacion de la ultima variable para preveer datos basura*/
-					usuario.notas[ELEC_BORR] = 0;
-
-					CANT_MAT--;
+					fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+					estado = MAIN_ASIGNATURA;
 				}
-			}
-		}
-
-
-		/*Sobre escritura de asignaturas*/
-		else /*para los casos de ELEC*/
-
-		{
-			NUMERO = atoi(ELEC);  /*Modificacion para que se guarde el numero ingresado en vez de su equivalente en ASCII*/
-			if(NUMERO >= CANT_MAT || CANT_MAT == 0 || (NUMERO == 0 && ELEC[0] != ASCII_CERO))
-			{
-				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
 			}
 			else
 			{
-				clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, NUMERO);
-				printf("%s", TEXT_MATERIA);
-				fgets(usuario.asignaturas[NUMERO], LENGTH_MAX_ASIGNATURA, stdin);
+				usuario = modificar(usuario, numero);
+			}
+			break;
+		}
 
-				printf("%s", TEXT_NOTA);
-				if(scanf("%i", &usuario.notas[NUMERO]) != 1 || usuario.notas[NUMERO] > MAX_CALIF || usuario.notas[NUMERO] < MIN_CANLIF)
+		} /*end of switch*/
+
+	} /*end of while*/
+
+	return usuario;
+}
+
+
+
+
+usuario_t agregar(usuario_t usuario, int cantidadAsignaturas)
+{
+
+	int problema, intentos = 0, salida = 0;
+
+
+	if(cantidadAsignaturas >= NUMERO_MAX_ASIGNATURAS)         /*Preveo que no se pase*/
+	{
+		fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_MAX_NOTA);
+	}
+
+	else
+	{
+		printf("\n%s", TEXT_MATERIA);
+
+		fgets(usuario.asignaturas[cantidadAsignaturas], LENGTH_MAX_ASIGNATURA, stdin);
+
+		printf("%s", TEXT_NOTA);
+
+		if(scanf("%i", &usuario.notas[cantidadAsignaturas]) != 1 || usuario.notas[cantidadAsignaturas] > MAX_CALIF || usuario.notas[cantidadAsignaturas] < MIN_CANLIF)
+		{
+			problema=1;
+
+			while(problema == 1 && salida != 1)
+			{
+				if(intentos == MAX_TRY)
 				{
-					PROBLEMA = 1;
-					while(PROBLEMA == 1 && SALIDA != 1)
+					fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_INGRESO_MATERIA);
+					clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, cantidadAsignaturas);
+					usuario.notas[cantidadAsignaturas] = 0;
+					salida = 1;
+				}
+
+				else
+				{
+					clear_buffer();
+
+					fprintf(stdout, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
+					if(scanf("%i", &usuario.notas[cantidadAsignaturas]) == 1 && usuario.notas[cantidadAsignaturas] <= MAX_CALIF && usuario.notas[cantidadAsignaturas] >= MIN_CANLIF)
 					{
-						if(INTENTOS == CANTIDAD_INTENTOS)
-						{
-							fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_REINGRESO_CONT_NOTA);
-
-							clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, NUMERO);
-
-							while(NUMERO < NUMERO_MAX_ASIGNATURAS - 1)
-							{
-								for(COLUMNA = 0; COLUMNA < LENGTH_MAX_ASIGNATURA; COLUMNA++)
-								{
-									usuario.asignaturas[NUMERO][COLUMNA] = usuario.asignaturas[NUMERO + 1][COLUMNA];
-								}
-								COLUMNA = 0;
-								usuario.notas[NUMERO] = usuario.notas[NUMERO + 1];
-								NUMERO++;
-							}
-							CANT_MAT--;
-							SALIDA = 1;
-						}
-						else
-						{
-							while(getchar() != '\n') ;
-
-							fprintf(stdout, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
-
-							if(scanf("%i", &usuario.notas[NUMERO]) == 1 && usuario.notas[NUMERO] <= MAX_CALIF && usuario.notas[NUMERO] >= MIN_CANLIF)
-							{
-								PROBLEMA = 0;
-							}
-
-						}
-						INTENTOS++;
+						problema = 0;
 					}
 				}
-				while(getchar()!='\n') ;
-
-				printf("\n");
+				intentos++;
 			}
+		}
+
+		clear_buffer();
+		printf("\n");
+	}
+	return usuario;
+}
+
+
+
+
+usuario_t eliminar(usuario_t usuario, int cantidadAsignaturas)
+{
+	int columna, numBorrar;
+	if(cantidadAsignaturas == 0)
+	{
+		fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+	}
+	else
+	{
+		printf("\n%s", TEXT_ELEC_BORRAR);
+
+		if(scanf("%i", &numBorrar) != 1 || numBorrar > cantidadAsignaturas - 1 || numBorrar < 0)
+		{
+			clear_buffer();
+
+			fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_ELEC);
+		}
+		else
+		{
+			clear_buffer();
+
+			while(numBorrar < NUMERO_MAX_ASIGNATURAS - 1)
+			{
+				for(columna = 0; columna < LENGTH_MAX_ASIGNATURA; columna++)
+				{
+					usuario.asignaturas[numBorrar][columna] = usuario.asignaturas[numBorrar + 1][columna];
+				}
+				columna=0;
+				usuario.notas[numBorrar] = usuario.notas[numBorrar + 1];
+				numBorrar++;
+			}
+
+			clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, numBorrar); /*Eliminacion de la ultima variable para preveer datos basura*/
+			usuario.notas[numBorrar] = 0;
 		}
 	}
 	return usuario;
@@ -407,18 +399,81 @@ usuario_t asignaturas(usuario_t usuario)
 
 
 
-void print_opciones(char materia[][LENGTH_MAX_ASIGNATURA], int nota[], int COLUMNA_IMP, int CANT)
+
+usuario_t modificar(usuario_t usuario, int numero)
 {
-	int COLUMNA;
+
+	int columna, intentos = 0, salida = 0, problema;
+
+	clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, numero);
+
+	printf("%s", TEXT_MATERIA);
+
+	fgets(usuario.asignaturas[numero], LENGTH_MAX_ASIGNATURA, stdin);
+
+	printf("%s", TEXT_NOTA);
+
+	if(scanf("%i", &usuario.notas[numero]) != 1 || usuario.notas[numero] > MAX_CALIF || usuario.notas[numero] < MIN_CANLIF)
+	{
+		problema = 1;
+		while(problema == 1 && salida != 1)
+		{
+			if(intentos == MAX_TRY)
+			{
+				fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_REINGRESO_CONT_NOTA);
+
+				clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, numero);
+
+				while(numero < NUMERO_MAX_ASIGNATURAS - 1)
+				{
+					for(columna = 0; columna < LENGTH_MAX_ASIGNATURA; columna++)
+					{
+						usuario.asignaturas[numero][columna] = usuario.asignaturas[numero + 1][columna];
+					}
+					columna = 0;
+					usuario.notas[numero] = usuario.notas[numero + 1];
+					numero++;
+				}
+				salida = 1;
+			}
+			else
+			{
+				clear_buffer();
+
+				fprintf(stdout, "%s: %s", ERR_PREFIJO, ERR_INGRESO_CONT_NOTA);
+
+				if(scanf("%i", &usuario.notas[numero]) == 1 && usuario.notas[numero] <= MAX_CALIF && usuario.notas[numero] >= MIN_CANLIF)
+				{
+					problema = 0;
+				}
+
+			}
+			intentos++;
+		}
+	}
+	clear_buffer();
+
+	printf("\n");
+	return usuario;
+}
+
+
+
+
+void print_opciones(usuario_t usuario, int columna_IMP, int CANT)
+{
+	int columna;
 
 	printf("\t%i) ", CANT);
-	for(COLUMNA=0; COLUMNA < COLUMNA_IMP - 2 && materia[CANT][COLUMNA] != '\n'; COLUMNA++)
+	for(columna=0; columna < columna_IMP - 2 && usuario.asignaturas[CANT][columna] != '\n'; columna++)
 	{
-		printf("%c", materia[CANT][COLUMNA]);
+		printf("%c", usuario.asignaturas[CANT][columna]);
 	}
 
-	printf(" (%i)\n", nota[CANT]);
+	printf(" (%i)\n", usuario.notas[CANT]);
 }
+
+
 
 
 void clear_notas(int nota[], int FILA_NOT)
@@ -432,27 +487,31 @@ void clear_notas(int nota[], int FILA_NOT)
 }
 
 
+
+
 void clear_materias(char materia[][LENGTH_MAX_ASIGNATURA], int FILA_MAT, int COLUM_MAT)
 {
-	int FILA, COLUMNA;
+	int FILA, columna;
 
 	for(FILA=0; FILA < FILA_MAT; FILA++)
 	{
-		for(COLUMNA=0; COLUMNA < COLUM_MAT; COLUMNA++)
+		for(columna=0; columna < COLUM_MAT; columna++)
 		{
-			materia[FILA][COLUMNA]='\0';
+			materia[FILA][columna]='\0';
 		}
 	}
 }
 
 
-void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BORR)
-{
-	int COLUMNA;
 
-	for(COLUMNA=0; COLUMNA<COLUMNA_BORR-1; COLUMNA++)
+
+void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int columna_BORR, int FILA_BORR)
+{
+	int columna;
+
+	for(columna=0; columna<columna_BORR-1; columna++)
 	{
-		m[FILA_BORR][COLUMNA]='\0';
+		m[FILA_BORR][columna]='\0';
 	}
 }
 
@@ -485,7 +544,7 @@ usuario_t metrica (usuario_t usuario)
 		/*menu principal*/
 		case MAIN_METRICA:
 		{
-			estado = menu(MENU_METRICA, &intentos);
+			estado = menu(MENU_METRICA, &intentos, usuario);
 			break;
 		}
 
@@ -555,8 +614,6 @@ usuario_t metrica (usuario_t usuario)
 			break;
 		}
 
-
-
 		default:
 		{
 			intentos++;
@@ -598,7 +655,6 @@ float promedio(usuario_t usuario, int cantidadAsignaturas)
 {
 	int i;
 	float suma = 0;
-
 
 	for(i = 0; i < cantidadAsignaturas; i++)
 	{

@@ -28,14 +28,10 @@
 #define LENGTH_MAX_CARRERAS 12
 #define LENGTH_MAX_NOMBRE_CARRERAS 35
 
-#define OUT 0
-#define IN 1
 
 #define MAX_CALIF 10
 #define MIN_CANLIF 0
-#define CANTIDAD_INTENTOS 3
 #define ASCII_CERO 48
-#define UNO 1
 
 /*Tipos de clasificacion de variables personales*/
 
@@ -67,9 +63,10 @@ usuario_t metrica(usuario_t);
 usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
 /*funciones de menu*/
-char menu(estado_main, int *tentativa);
+char menu(estado_main, int *tentativa, usuario_t usuario);
 void imprimir_menu_principal(void);
 void imprimir_menu_registro(void);
+void imprimir_menu_asignaturas(usuario_t usuario);
 void imprimir_menu_metrica(void);
 
 /*funcionnes y tipos de registro*/
@@ -81,9 +78,16 @@ typedef enum
 void imprimir_carrera_aviso(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 void imprimir_carrera_fin(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
-/*funcionnes de asignaturas*/
-void print_opciones(char materia[][LENGTH_MAX_ASIGNATURA],int nota[], int COLUMNA_IMP, int CANT);
-void clear_notas(int nota[], int FILA_NOT);
+/*funcionnes y tipos de asignaturas*/
+typedef enum
+{
+	MAIN_ASIGNATURA, AGRAGAR = ASIGNATURA_OPCION_INGRESO_CHAR, ELIMINAR = ASIGNATURA_OPCION_BORRAR_CHAR, VOLVER_A = ASIGNATURA_OPCION_SALIDA_CHAR
+}estado_asignatura;
+
+usuario_t agregar(usuario_t usuario, int cantidadAsignaturas);
+usuario_t eliminar(usuario_t usuario, int cantidadAsignaturas);
+usuario_t modificar(usuario_t usuario, int numero);
+void print_opciones(usuario_t usuario, int columna_IMP, int CANT);
 void clear_materias(char materia[][LENGTH_MAX_ASIGNATURA], int FILA_MAT, int COLUM_MAT);
 void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BORR);
 
