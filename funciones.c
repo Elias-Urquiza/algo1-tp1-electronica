@@ -14,7 +14,6 @@ char menu (estado_main estado, int *intentos, usuario_t usuario)
 	switch (estado) {
 	case MAIN_MENU: imprimir_menu_principal(); break;
 	case MENU_REGISTRO: imprimir_menu_registro(); break;
-	case MENU_ASIGNATURAS: imprimir_menu_asignaturas(usuario); break;
 	case MENU_METRICA: imprimir_menu_metrica(); break;
 	default: NULL; break;
 	}
@@ -30,6 +29,18 @@ char menu (estado_main estado, int *intentos, usuario_t usuario)
 	if ((letter != 'm') || (estado != MENU_METRICA)) /*para hacer la diferencia enter Maximo y minimo*/
 		letter = toupper(letter); /*poner en mayuscula*/
 	return letter;
+}
+
+void submenu_asignaturas (char* option,estado_main estado, int *intentos, usuario_t usuario)
+{
+	imprimir_menu_asignaturas(usuario);
+	while ((scanf("%s", option) != 1) && (*intentos < MAX_TRY))
+	{
+			fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+			(*intentos)++;
+			clear_buffer();
+	}
+	clear_buffer();
 }
 
 /*imprime menús*/
@@ -223,7 +234,7 @@ usuario_t asignaturas(usuario_t usuario)
 {
 /*Defino un rango de las matrices junto a un par de valores auxiliares*/
 	estado_asignatura estado = MAIN_ASIGNATURA;
-	char lettra;
+	char opcion[2];
 	int cantidadAsignaturas;
 	int intentos = 0, numero = -1;
 
@@ -237,12 +248,12 @@ usuario_t asignaturas(usuario_t usuario)
 
 		case MAIN_ASIGNATURA:
 		{
-			lettra = menu(MENU_ASIGNATURAS, &intentos, usuario);
-			estado = lettra;
+			submenu_asignaturas(opcion, MENU_ASIGNATURAS, &intentos, usuario);
+			estado = opcion[0];
 			break;
 		}
 
-		case AGRAGAR:
+		case AGREGAR:
 		{
 			usuario = agregar(usuario, cantidadAsignaturas);
 			intentos = 0;
@@ -270,8 +281,8 @@ usuario_t asignaturas(usuario_t usuario)
 
 		default:
 		{
-			numero = lettra - ASCII_CERO;  /*Modificacion para que se guarde el numero ingresado en vez de su equivalente en ASCII*/
-			if(numero >= cantidadAsignaturas || cantidadAsignaturas == 0 || (numero == 0 && lettra != ASCII_CERO))
+			numero = atoi(opcion);  /*Modificacion para que se guarde el numero ingresado en vez de su equivalente en ASCII*/
+			if(numero >= cantidadAsignaturas || cantidadAsignaturas == 0 || (numero == 0 && opcion[0] != ASCII_CERO))
 			{
 				intentos++;
 				if (intentos > MAX_TRY)
@@ -289,6 +300,7 @@ usuario_t asignaturas(usuario_t usuario)
 			{
 				usuario = modificar(usuario, numero);
 			}
+			estado = MAIN_ASIGNATURA;
 			break;
 		}
 
@@ -472,37 +484,6 @@ void print_opciones(usuario_t usuario, int columna_IMP, int CANT)
 
 	printf(" (%i)\n", usuario.notas[CANT]);
 }
-
-
-
-
-void clear_notas(int nota[], int FILA_NOT)
-{
-	int FILA;
-
-	for(FILA=0; FILA<FILA_NOT; FILA++)
-	{
-		nota[FILA]='\0';
-	}
-}
-
-
-
-
-void clear_materias(char materia[][LENGTH_MAX_ASIGNATURA], int FILA_MAT, int COLUM_MAT)
-{
-	int FILA, columna;
-
-	for(FILA=0; FILA < FILA_MAT; FILA++)
-	{
-		for(columna=0; columna < COLUM_MAT; columna++)
-		{
-			materia[FILA][columna]='\0';
-		}
-	}
-}
-
-
 
 
 void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int columna_BORR, int FILA_BORR)
