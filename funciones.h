@@ -53,17 +53,15 @@ typedef struct
 
 
 /*funcionnes del main*/
-char menu_principal(int *tentativa);
-void imprimir_menu_principal(void);
 usuario_t reinit(usuario_t);
-void clear_buffer(void);
 usuario_t registro(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
 usuario_t asignaturas(usuario_t usuario);
 usuario_t metrica(usuario_t);
 usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS]);
+void clear_buffer(void);
 
 /*funciones de menu*/
-char menu(estado_main, int *tentativa, usuario_t usuario);
+char menu(estado_main, int *intentos, usuario_t usuario);
 void imprimir_menu_principal(void);
 void imprimir_menu_registro(void);
 void imprimir_menu_asignaturas(usuario_t usuario);
@@ -81,7 +79,7 @@ void imprimir_carrera_fin(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 /*funcionnes y tipos de asignaturas*/
 typedef enum
 {
-	MAIN_ASIGNATURA, AGRAGAR = ASIGNATURA_OPCION_INGRESO_CHAR, ELIMINAR = ASIGNATURA_OPCION_BORRAR_CHAR, VOLVER_A = ASIGNATURA_OPCION_SALIDA_CHAR
+	MAIN_ASIGNATURA, AGREGAR = ASIGNATURA_OPCION_INGRESO_CHAR, ELIMINAR = ASIGNATURA_OPCION_BORRAR_CHAR, VOLVER_A = ASIGNATURA_OPCION_SALIDA_CHAR
 }estado_asignatura;
 
 usuario_t agregar(usuario_t usuario, int cantidadAsignaturas);
@@ -91,7 +89,7 @@ void print_opciones(usuario_t usuario, int columna_IMP, int CANT);
 void clear_materias(char materia[][LENGTH_MAX_ASIGNATURA], int FILA_MAT, int COLUM_MAT);
 void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BORR);
 
-/*funcionnes y tipos de metrica*/
+/*funcionnes y tipos de metricas*/
 typedef enum
 {
 	MAIN_METRICA, PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, MAXIMO = METRICA_OPCION_MAXIMO_CHAR, MINIMO = METRICA_OPCION_MINIMO_CHAR, CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, APLAZOS = METRICA_OPCION_APLAZOS_CHAR, VOLVER_M = METRICA_OPCION_VOLVER_CHAR
