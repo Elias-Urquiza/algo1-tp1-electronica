@@ -320,7 +320,7 @@ usuario_t agregar(usuario_t usuario, int cantidadAsignaturas)
 	int problema, intentos = 0, salida = 0;
 
 
-	if(cantidadAsignaturas >= NUMERO_MAX_ASIGNATURAS)         /*Preveo que no se pase*/
+	if(cantidadAsignaturas >= NUMERO_MAX_ASIGNATURAS)
 	{
 		fprintf(stdout,"%s: %s", ERR_PREFIJO, ERR_MAX_NOTA);
 	}
@@ -402,7 +402,7 @@ usuario_t eliminar(usuario_t usuario, int cantidadAsignaturas)
 				numBorrar++;
 			}
 
-			clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, numBorrar); /*Eliminacion de la ultima variable para preveer datos basura*/
+			clear_regrab(usuario.asignaturas, LENGTH_MAX_ASIGNATURA, numBorrar); /*Eliminacion de la ultima variable para prevenir datos basura*/
 			usuario.notas[numBorrar] = 0;
 		}
 	}
