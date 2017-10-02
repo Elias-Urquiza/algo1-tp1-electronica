@@ -778,7 +778,7 @@ void imprimir_carrera_fin(int fila, char carreras[][LENGTH_MAX_NOMBRE_CARRERAS])
 	}
 }
 
-void clear_buffer(void) /*limpia el buffer. No siempre utilizado*/
+void clear_buffer(void) /*limpia el buffer*/
 {
 	while(getchar() != '\n')
 		NULL;
