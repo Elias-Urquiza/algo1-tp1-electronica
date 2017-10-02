@@ -5,7 +5,7 @@
 
 int main(void)
 {
-	/*Arreglo que contiene el nombre de las carreras correspondiente al numero de la misma*/
+	/*Arreglo que contiene el nombre de las carreras distribuidas en filas según su número de carrera.*/
 	char carreras[LENGTH_MAX_CARRERAS][LENGTH_MAX_NOMBRE_CARRERAS] = {{ING_0}, {ING_1}, {ING_2}, {ING_3}, {ING_4}, {ING_5}, {ING_6}, {ING_7}, {ING_8}, {ING_9}, {ING_10}, {ING_11}};
 	estado_main estado = MAIN_MENU;
 	usuario_t alumno;
