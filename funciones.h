@@ -85,7 +85,7 @@ typedef enum
 void imprimir_carrera_aviso(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 void imprimir_carrera_fin(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 
-/*funcionnes y tipos de asignaturas*/
+/*funciones y tipos de asignaturas*/
 typedef enum
 {
 	MAIN_ASIGNATURA, 
