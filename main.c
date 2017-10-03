@@ -1,82 +1,91 @@
-#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "funciones.h"
 
 int main(void)
 {
-	/*Arreglo que contiene el nombre de las carreras correspondiente al numero de la misma*/
+	/*Arreglo que contiene el nombre de las carreras distribuidas en filas según su número de carrera.*/
 	char carreras[LENGTH_MAX_CARRERAS][LENGTH_MAX_NOMBRE_CARRERAS] = {{ING_0}, {ING_1}, {ING_2}, {ING_3}, {ING_4}, {ING_5}, {ING_6}, {ING_7}, {ING_8}, {ING_9}, {ING_10}, {ING_11}};
-
 	estado_main estado = MAIN_MENU;
-	char letter = '\0';
 	usuario_t alumno;
-	int i = 0;
+	int intentos = 0;
 
-	alumno = reinit(alumno);
+	alumno = reinit(alumno); /*inicializa las variables de la struct*/
 
 	puts(MSJ_BIENVENIDA);
 
-	while(1)
+
+	while(estado != MAIN_SALIR)
 	{
+
 		switch(estado)
 		{
-			case MAIN_MENU:
-			{
-				puts(MSJ_MAIN);
-				printf("\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n\t%c) %s\n? ", MAIN_OPCION_1_CHAR, MAIN_OPCION_1, MAIN_OPCION_2_CHAR, MAIN_OPCION_2, MAIN_OPCION_3_CHAR, MAIN_OPCION_3, MAIN_OPCION_FINALIZAR_CHAR, MAIN_OPCION_FINALIZAR, MAIN_OPCION_SALIR_CHAR, MAIN_OPCION_SALIR);
 
-				letter = '\0';
-				i = 0;
-				while((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
-				{
-					scanf("%c", &letter);
-					if((letter != MAIN_OPCION_1_CHAR) && (letter != MAIN_OPCION_2_CHAR) && (letter != MAIN_OPCION_3_CHAR) && (letter != MAIN_OPCION_FINALIZAR_CHAR) && (letter != MAIN_OPCION_SALIR_CHAR))
-					{
-						fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-						i++;
-						if(i >= 3)
-							letter = MAIN_OPCION_SALIR_CHAR;
-					}
-					clear_buffer();
-				}
-
-				estado = letter;
-				break;
-			}
-
-			case MENU_REGISTRO:
-			{
-				alumno = registro(alumno, carreras); /*function de elias*/
-				estado = MAIN_MENU;
-				break;
-			}
-
-			case MENU_ASIGNATURAS:
-			{
-				alumno = asignaturas(alumno); /*function de mauri*/
-				estado = MAIN_MENU;
-				break;
-			}
-
-			case MENU_METRICA:
-			{
-				alumno = metrica(alumno); /*function de aurelien*/
-				estado = MAIN_MENU;
-				break;
-			}
-
-			case MENU_FINALIZAR:
-			{
-				alumno = finalizar(alumno, carreras);
-				estado = MAIN_MENU;
-				break;
-			}
-
-			case MAIN_SALIR:
-			{
-				return EXIT_SUCCESS;
-			}
-
+		case MAIN_MENU:
+		{
+			estado = menu(MAIN_MENU, &intentos, alumno);
+			break;
 		}
-	}
 
-	return 0;
+		case MENU_REGISTRO:
+		{
+			alumno = registro(alumno, carreras);
+			estado = MAIN_MENU;
+			intentos = 0;
+			break;
+		}
+
+		case MENU_ASIGNATURAS:
+		{
+			alumno = asignaturas(alumno);
+			estado = MAIN_MENU;
+			intentos = 0;
+			break;
+		}
+
+		case MENU_METRICA:
+		{
+			alumno = metrica(alumno);
+			estado = MAIN_MENU;
+			intentos = 0;
+			break;
+		}
+
+		case MENU_FINALIZAR:
+		{
+			alumno = finalizar(alumno, carreras);
+			estado = MAIN_MENU;
+			intentos = 0;
+			break;
+		}
+
+		case MAIN_SALIR:
+		{
+			estado = MAIN_SALIR;
+			break;
+		}
+
+		default:
+		{
+			intentos++;
+
+			if (intentos > MAX_TRY)
+			{
+				fprintf(stdout, "%s\n", ERR_PREFIJO);
+				estado = MAIN_SALIR;
+			}
+			else
+			{
+				fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+				estado = MAIN_MENU;
+			}
+			break;
+		}
+
+		} /* end of switch */
+
+	} /* end of while */
+
+	return EXIT_SUCCESS;
 }

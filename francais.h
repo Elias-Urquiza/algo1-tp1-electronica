@@ -49,17 +49,18 @@
 
 
 /* MSJ asignatura */
-#define ASIGNATURA_OPCION_INGRESO "+) Ajouter une matière"
-#define ASIGNATURA_OPCION_SALIDA "!) Sortir."
-#define ASIGNATURA_OPCION_BORRAR "-) Supprimer une matière."
+#define ASIGNATURA_OPCION_INGRESO "Ajouter une matière"
+#define ASIGNATURA_OPCION_SALIDA "Sortir."
+#define ASIGNATURA_OPCION_BORRAR "Supprimer une matière."
+#define ASIGNATURA_OPCION_INGRESO_CHAR '+'
+#define ASIGNATURA_OPCION_SALIDA_CHAR '!'
+#define ASIGNATURA_OPCION_BORRAR_CHAR '-'
 #define ASIGNATURA_OPCION_PREGUNTA "? "
 #define TEXT_NOTA "Entrer le note: "
 #define TEXT_MATERIA "Entrer le matière: "
 #define TEXT_ELEC_BORRAR "Rentrer le numéro de la matière que vous souhaitez effacer: "
 
-#define AGREGAR '+'
-#define ELIMINAR '-'
-#define SALIR '!'
+
 
 
 /* MSJ registro */

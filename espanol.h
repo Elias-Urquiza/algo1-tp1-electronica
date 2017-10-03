@@ -49,17 +49,16 @@
 
 
 /* MSJ asignatura */
-#define ASIGNATURA_OPCION_INGRESO "+) Ingreso de asignatura."
-#define ASIGNATURA_OPCION_SALIDA "!) Salir."
-#define ASIGNATURA_OPCION_BORRAR "-) Eliminar una asignatura."
+#define ASIGNATURA_OPCION_INGRESO "Ingreso de asignatura."
+#define ASIGNATURA_OPCION_INGRESO_CHAR '+'
+#define ASIGNATURA_OPCION_SALIDA "Salir."
+#define ASIGNATURA_OPCION_SALIDA_CHAR '!'
+#define ASIGNATURA_OPCION_BORRAR "Eliminar una asignatura."
+#define ASIGNATURA_OPCION_BORRAR_CHAR '-'
 #define ASIGNATURA_OPCION_PREGUNTA "? "
 #define TEXT_NOTA "Ingrese la nota: "
 #define TEXT_MATERIA "Ingrese la asignatura: "
 #define TEXT_ELEC_BORRAR "Ingrese el numero de asignatura que desea borrar: "
-
-#define AGREGAR '+'
-#define ELIMINAR '-'
-#define SALIR '!'
 
 
 /* MSJ registro */
