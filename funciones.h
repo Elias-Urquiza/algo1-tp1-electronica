@@ -2,7 +2,7 @@
 #define FUNCIONES__H
 
 /*define lenguaje*/
-#define ENGLISH
+#define ESPAGNOL
 
 #ifdef ESPANOL
 #include "espanol.h"
@@ -37,11 +37,11 @@
 
 typedef enum
 {
-	MAIN_MENU, 
-	MENU_REGISTRO = MAIN_OPCION_1_CHAR, 
-	MENU_ASIGNATURAS = MAIN_OPCION_2_CHAR, 
-	MENU_METRICA = MAIN_OPCION_3_CHAR, 
-	MENU_FINALIZAR = MAIN_OPCION_FINALIZAR_CHAR, 
+	MAIN_MENU,
+	MENU_REGISTRO = MAIN_OPCION_1_CHAR,
+	MENU_ASIGNATURAS = MAIN_OPCION_2_CHAR,
+	MENU_METRICA = MAIN_OPCION_3_CHAR,
+	MENU_FINALIZAR = MAIN_OPCION_FINALIZAR_CHAR,
 	MAIN_SALIR = MAIN_OPCION_SALIR_CHAR
 } estado_main;
 
@@ -66,7 +66,8 @@ usuario_t finalizar(usuario_t usuario, char carreras[][LENGTH_MAX_NOMBRE_CARRERA
 void clear_buffer(void);
 
 /*funciones de menu*/
-char menu(estado_main, int *intentos, usuario_t usuario);
+char menu(estado_main, int*, usuario_t);
+void submenu_asignaturas (char*, estado_main, int*, usuario_t);
 void imprimir_menu_principal(void);
 void imprimir_menu_registro(void);
 void imprimir_menu_asignaturas(usuario_t usuario);
@@ -75,10 +76,10 @@ void imprimir_menu_metrica(void);
 /*funcionnes y tipos de registro*/
 typedef enum
 {
-	MAIN_REGISTRO, 
-	NOMBRE = REGISTRO_OPCION_NOMBRE_CHAR, 
-	PADRON = REGISTRO_OPCION_PADRON_CHAR, 
-	CARRERA = REGISTRO_OPCION_CARRERA_CHAR, 
+	MAIN_REGISTRO,
+	NOMBRE = REGISTRO_OPCION_NOMBRE_CHAR,
+	PADRON = REGISTRO_OPCION_PADRON_CHAR,
+	CARRERA = REGISTRO_OPCION_CARRERA_CHAR,
 	VOLVER_R = REGISTRO_OPCION_VOLVER_CHAR
 }estado_registro;
 
@@ -88,9 +89,9 @@ void imprimir_carrera_fin(int fila, char carrera[][LENGTH_MAX_NOMBRE_CARRERAS]);
 /*funciones y tipos de asignaturas*/
 typedef enum
 {
-	MAIN_ASIGNATURA, 
-	AGREGAR = ASIGNATURA_OPCION_INGRESO_CHAR, 
-	ELIMINAR = ASIGNATURA_OPCION_BORRAR_CHAR, 
+	MAIN_ASIGNATURA,
+	AGREGAR = ASIGNATURA_OPCION_INGRESO_CHAR,
+	ELIMINAR = ASIGNATURA_OPCION_BORRAR_CHAR,
 	VOLVER_A = ASIGNATURA_OPCION_SALIDA_CHAR
 }estado_asignatura;
 
@@ -104,12 +105,12 @@ void clear_regrab(char m[][LENGTH_MAX_ASIGNATURA], int COLUMNA_BORR, int FILA_BO
 /*funcionnes y tipos de metricas*/
 typedef enum
 {
-	MAIN_METRICA, 
-	PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR, 
-	MAXIMO = METRICA_OPCION_MAXIMO_CHAR, 
-	MINIMO = METRICA_OPCION_MINIMO_CHAR, 
-	CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR, 
-	APLAZOS = METRICA_OPCION_APLAZOS_CHAR, 
+	MAIN_METRICA,
+	PROMEDIO = METRICA_OPCION_PROMEDIO_CHAR,
+	MAXIMO = METRICA_OPCION_MAXIMO_CHAR,
+	MINIMO = METRICA_OPCION_MINIMO_CHAR,
+	CANTIDAD = METRICA_OPCION_CANTIDAD_CHAR,
+	APLAZOS = METRICA_OPCION_APLAZOS_CHAR,
 	VOLVER_M = METRICA_OPCION_VOLVER_CHAR
 }estado_metrica;
 

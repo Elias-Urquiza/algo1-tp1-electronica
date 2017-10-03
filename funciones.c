@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,9 +37,9 @@ void submenu_asignaturas (char* option,estado_main estado, int *intentos, usuari
 	imprimir_menu_asignaturas(usuario);
 	while ((scanf("%s", option) != 1) && (*intentos < MAX_TRY))
 	{
-			fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
-			(*intentos)++;
-			clear_buffer();
+		fprintf(stdout, "%s: %s\n", ERR_PREFIJO, ERR_OPCIONES);
+		(*intentos)++;
+		clear_buffer();
 	}
 	clear_buffer();
 }
