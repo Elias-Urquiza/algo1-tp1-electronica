@@ -518,6 +518,12 @@ usuario_t metrica (usuario_t usuario)
 	float promedioAsignaturas;
 	int cantidadAsignaturas = cantidad(usuario);
 	int index, i, intentos = 0;
+	
+	if (cantidadAsignaturas == 0) /*corroborracion de que hay al menos una materia ingresada*/
+	{
+		fprintf(stdout, "%s: %s\n",ERR_PREFIJO, ERR_CERO_ASIGNATURAS);
+		estado = VOLVER_M;
+	}
 
 	while(estado != VOLVER_M) /*inicializa el sub-menú y lo mantiene dentro del mismo hasta que el usuario elija salir*/
 	{
