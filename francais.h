@@ -21,6 +21,8 @@
 #define ERR_REG_PADRON "Le padron ne peut pas être lu."
 #define ERR_REG_CARRERA "Numéro de departement invalide."
 
+#define ERR_CERO_ASIGNATURAS "Vous ne pouvez pas calculer de mesure sans avoir au moins un sujet entré" /*texto agregado*/
+
 /* MSJ main */
 #define MAIN_OPCION_1 "Registre personnel"
 #define MAIN_OPCION_1_CHAR 'R'
