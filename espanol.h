@@ -21,6 +21,8 @@
 #define ERR_REG_PADRON "El padrón ingresado no se pudo leer."
 #define ERR_REG_CARRERA "Número de Carrera Inválido."
 
+#define ERR_CERO_ASIGNATURAS "No se puede calcular ninguna metrica sin al menos una asignatura ingresada"
+
 /* MSJ main */
 #define MAIN_OPCION_1 "Registro Personal"
 #define MAIN_OPCION_1_CHAR 'R'
