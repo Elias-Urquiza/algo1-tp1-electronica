@@ -21,6 +21,8 @@
 #define ERR_REG_PADRON "The college ID you typed couldn't be read."
 #define ERR_REG_CARRERA "Invalid Career Number."
 
+#define ERR_CERO_ASIGNATURAS "You can't calculate any metric without at least one matter"
+
 /* Main Options */
 #define MAIN_OPCION_1 "Personal Registry"
 #define MAIN_OPCION_1_CHAR 'R'
